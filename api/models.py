@@ -11,7 +11,7 @@ class Members(models.Model):
 	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
 	PID=models.AutoField(primary_key=True)
 	Age=models.IntegerField(default=0)
-	genders=('M','F','B','G','L','T')
+	genders=(('M',"Male"),('F',"Female"),('B',"Bi"),('G',"Gay"),('L',"Lesbian"),('T',"Trans"))
 	Gender=models.CharField(max_length=1,choices=genders)
 
 class Photos(models.Model):
@@ -33,7 +33,7 @@ class Farms(models.Model):
 class Crops(models.Model):
 	FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
 	Year=models.IntegerField()
-	seasons=["Summer","Winter","Monsoon"]
+	seasons=(('S',"Summer"),('W',"Winter"),('M',"Monsoon"))
 	Seasons=models.CharField(max_length=20,choices=seasons)
 
 class Wells(models.Model):
@@ -46,4 +46,4 @@ class Wells(models.Model):
 class WellWater(models.Model):
 	WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
 	Year=models.IntegerField()
-	measured_date=models.DateField(_("Date"), default=datetime.date.today)
+	measured_date=models.DateField(default=datetime.date.today)

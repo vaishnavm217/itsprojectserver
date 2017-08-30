@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1','farmereverywhere-server.herokuapp.com','blooming-b
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
