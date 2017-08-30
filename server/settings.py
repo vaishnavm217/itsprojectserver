@@ -25,7 +25,7 @@ SECRET_KEY = '7op^nso$m4jrh99dqy$$8s$5ucl_jem1a=64$!u8gl!22%-z-e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 db_from_env = dj_database_url.config(conn_max_age=500)
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0','farmereverywhere-server.herokuapp.com','blooming-basin-35963.herokuapp.com']
 
 
 # Application definition
