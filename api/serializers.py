@@ -10,7 +10,7 @@ class HousesSerializer(serializers.ModelSerializer):
 class MembersSerializer(serializers.ModelSerializer):
     	class Meta:
         	model = Members
-        	fields = ('HID', 'PID', 'Age', 'Gender')
+        	fields = ('HID','Name', 'PID', 'Age', 'Gender')
 
 class PhotosSerializer(serializers.ModelSerializer):
 	class Meta:
