@@ -3,8 +3,8 @@ import datetime
 
 class Houses(models.Model):
 	HID=models.AutoField(primary_key=True)
-	Long=models.DecimalField(max_digits=8,decimal_places=5)
-	Lat=models.DecimalField(max_digits=8,decimal_places=5)
+	Long=models.DecimalField(max_digits=7,decimal_places=4)
+	Lat=models.DecimalField(max_digits=7,decimal_places=4)
 	Income=models.IntegerField(default=0)
 	def __str__(self):
 		return "%s" %(self.HID)
@@ -37,8 +37,8 @@ class Videos(models.Model):
 class Farms(models.Model):
 	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
 	FID=models.AutoField(primary_key=True)
-	Long=models.DecimalField(max_digits=8,decimal_places=5)
-	Lat=models.DecimalField(max_digits=8,decimal_places=5)
+	Long=models.DecimalField(max_digits=7,decimal_places=4)
+	Lat=models.DecimalField(max_digits=7,decimal_places=4)
 	def __str__(self):
 		return "%s" % (self.FID)
 
@@ -53,9 +53,9 @@ class Crops(models.Model):
 class Wells(models.Model):
 	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
 	WID=models.AutoField(primary_key=True)
-	Long=models.DecimalField(max_digits=8,decimal_places=5)
-	Lat=models.DecimalField(max_digits=8,decimal_places=5)
-	AvgYield=models.DecimalField(max_digits=8,decimal_places=5)
+	Long=models.DecimalField(max_digits=7,decimal_places=4)
+	Lat=models.DecimalField(max_digits=7,decimal_places=4)
+	AvgYield=models.DecimalField(max_digits=7,decimal_places=4)
 	def __str__(self):
 		return "%s" %(self.WID)
 
