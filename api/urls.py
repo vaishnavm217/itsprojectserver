@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from . import views 
+from api import views 
 
 urlpatterns = [
-    url(r'^$',views.index),
+    	url(r'^',views.snippet_list1),
+	url(r'^',views.snippet_list2),
+	url(r'^',views.snippet_list3),
+	url(r'^',views.snippet_list4),
+	url(r'^',views.snippet_list5),
+	url(r'^',views.snippet_list6),
+	url(r'^',views.snippet_list7),
+	url(r'^',views.snippet_list8),
 ]
