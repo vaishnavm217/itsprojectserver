@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'django.contrib.gis',
 	'rest_framework',
 ]
 
@@ -84,7 +85,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'django_db',
         'USER': 'Vaishnav',
         'PASSWORD': 'abcdef',
