@@ -90,7 +90,7 @@ def snippet_list5(request):
     """
     if request.method == 'POST':
         #data = JSONParser().parse(request)
-        data = Farms.objects.filter(FIR=request.POST['HID'])
+        data = Farms.objects.filter(FID=request.POST['HID'])
         serializer = FarmsSerializer(data,many=True)
 #        if serializer.is_valid():
 #            serializer.save()
