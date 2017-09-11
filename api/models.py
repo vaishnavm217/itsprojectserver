@@ -41,8 +41,6 @@ class Farms(models.Model):
 	FID=models.AutoField(primary_key=True)
     plot=models.PolygonField(srid=4326,geography=True)
     Area=models.FloatField(default=self.plot.area,editable=False)
-#	Long=models.DecimalField(max_digits=7,decimal_places=4)
-#	Lat=models.DecimalField(max_digits=7,decimal_places=4)
 	def __str__(self):
 		return "%s" % (self.FID)
 
