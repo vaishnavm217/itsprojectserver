@@ -2,13 +2,13 @@ from django.contrib.gis.db import models
 import datetime
 
 class Houses(models.Model):
-	HID=models.AutoField(primary_key=True)
+    HID=models.AutoField(primary_key=True)
     point=models.PointField()
-#	Long=models.DecimalField(max_digits=7,decimal_places=4)
-#	Lat=models.DecimalField(max_digits=7,decimal_places=4)
-	Income=models.IntegerField(default=0)
-	def __str__(self):
-		return "%s" %(self.HID)
+    #	Long=models.DecimalField(max_digits=7,decimal_places=4)
+    #	Lat=models.DecimalField(max_digits=7,decimal_places=4)
+    Income=models.IntegerField(default=0)
+    def __str__(self):
+        return "%s" %(self.HID)
 
 class Members(models.Model):
 	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
