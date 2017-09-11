@@ -39,8 +39,10 @@ class Videos(models.Model):
 class Farms(models.Model):
 	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
 	FID=models.AutoField(primary_key=True)
-	Long=models.DecimalField(max_digits=7,decimal_places=4)
-	Lat=models.DecimalField(max_digits=7,decimal_places=4)
+    plot=models.PolygonField(srid=4326,geography=True)
+    Area=models.FloatField(default=self.plot.area,editable=False)
+#	Long=models.DecimalField(max_digits=7,decimal_places=4)
+#	Lat=models.DecimalField(max_digits=7,decimal_places=4)
 	def __str__(self):
 		return "%s" % (self.FID)
 
@@ -55,8 +57,9 @@ class Crops(models.Model):
 class Wells(models.Model):
 	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
 	WID=models.AutoField(primary_key=True)
-	Long=models.DecimalField(max_digits=7,decimal_places=4)
-	Lat=models.DecimalField(max_digits=7,decimal_places=4)
+    point=models.PointField(default=Point(1,1))
+#	Long=models.DecimalField(max_digits=7,decimal_places=4)
+#	Lat=models.DecimalField(max_digits=7,decimal_places=4)
 	AvgYield=models.DecimalField(max_digits=7,decimal_places=4)
 	def __str__(self):
 		return "%s" %(self.WID)
@@ -64,6 +67,7 @@ class Wells(models.Model):
 class WellWater(models.Model):
 	WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
 	Year=models.IntegerField()
+    Yield=models.FloatField(default=0.0)
 	measured_date=models.DateField(default=datetime.date.today)
 	def __str__(self):
 		return "%s : %s" %(self.WID,self.WID)
