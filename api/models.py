@@ -27,7 +27,7 @@ class Photos(models.Model):
 	URL=models.CharField(max_length=200)
 	def __str__(self):
 		return "%s : %s" % (self.HID,self.PHID)
-
+	
 class Videos(models.Model):
 	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
 	VID=models.AutoField(primary_key=True)
