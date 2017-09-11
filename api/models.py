@@ -37,12 +37,12 @@ class Videos(models.Model):
 		return "%s : %s" % (self.HID,self.VID)
 
 class Farms(models.Model):
-	HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
-	FID=models.AutoField(primary_key=True)
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+    FID=models.AutoField(primary_key=True)
     plot=models.PolygonField(srid=4326,geography=True)
     Area=models.FloatField(default=self.plot.area,editable=False)
-	def __str__(self):
-		return "%s" % (self.FID)
+    def __str__(self):
+        return "%s" % (self.FID)
 
 class Crops(models.Model):
 	FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
