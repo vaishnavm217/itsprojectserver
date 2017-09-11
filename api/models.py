@@ -1,9 +1,10 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 import datetime
 
 class Houses(models.Model):
     HID=models.AutoField(primary_key=True)
-    point=models.PointField()
+    point=models.PointField(default=Point(1,1))
     #	Long=models.DecimalField(max_digits=7,decimal_places=4)
     #	Lat=models.DecimalField(max_digits=7,decimal_places=4)
     Income=models.IntegerField(default=0)
