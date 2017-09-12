@@ -1,10 +1,11 @@
 from api.models import Houses, Members, Photos, Videos, Farms, Crops, Wells, WellWater
 from rest_framework import serializers
-
-class HousesSerializer(serializers.ModelSerializer):
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
+class HousesSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Houses
-        fields = ('HID', 'point','income')
+        geo_field = "point"
+        fields = ('HID','income')
 
 
 class MembersSerializer(serializers.ModelSerializer):
