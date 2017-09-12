@@ -23,7 +23,7 @@ class Members(models.Model):
 class Photos(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     PHID=models.AutoField(primary_key=True)
-    photo=models.ImageField(upload_to = 'uploaded_images/')
+    photo=models.FileField(upload_to = 'uploaded_images/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.PHID)
 
