@@ -4,6 +4,7 @@ import datetime
 
 class Houses(models.Model):
     HID=models.AutoField(primary_key=True)
+    income=models.FloatField(default=0.0)
     point=models.PointField(default=Point(1,1),null=True)
     def __str__(self):
         return "%s" %(self.HID)

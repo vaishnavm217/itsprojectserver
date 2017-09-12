@@ -4,7 +4,7 @@ from rest_framework import serializers
 class HousesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Houses
-        fields = ('HID', 'point', 'Income')
+        fields = ('HID', 'point','income')
 
 
 class MembersSerializer(serializers.ModelSerializer):
