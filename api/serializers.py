@@ -24,7 +24,7 @@ class VideosSerializer(serializers.ModelSerializer):
 class FarmsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Farms
-        fields = ('HID', 'FID', 'plot')
+        fields = ('HID', 'FID', 'plot','area')
 
 class CropsSerializer(serializers.ModelSerializer):
     class Meta:
