@@ -12,7 +12,7 @@ class Members(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     PID=models.AutoField(primary_key=True)
     Age=models.IntegerField(default=0)
-    genders=(('M',"Male"),('F',"Female"),('B',"Bi"),('G',"Gay"),('L',"Lesbian"),('T',"Trans"))
+    genders=(('M',"Male"),('F',"Female"))
     Name=models.CharField(max_length=30,default="")
     Gender=models.CharField(max_length=1,choices=genders)
     def __str__(self):
