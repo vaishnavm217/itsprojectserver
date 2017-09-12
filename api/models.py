@@ -38,8 +38,13 @@ class Farms(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     FID=models.AutoField(primary_key=True)
     plot=models.PolygonField(srid=4326,geography=True)
+    area=models.FloatField(default=0.0)
     def __str__(self):
         return "%s" % (self.FID)
+    def save(self):
+        temp=self.plot.transform(27700,clone=True)
+        self.area=temp.area
+        super().save(self)
 
 class Crops(models.Model):
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
