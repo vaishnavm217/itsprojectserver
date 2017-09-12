@@ -14,7 +14,7 @@ class MembersSerializer(serializers.ModelSerializer):
 class PhotosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photos
-        fields = ('HID','PHID','URL')
+        fields = ('HID','PHID','photo')
 
 class VideosSerializer(serializers.ModelSerializer):
     class Meta:
