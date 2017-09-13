@@ -20,7 +20,7 @@ def snippet_list1(request):
     if request.method == 'POST':
         #data = JSONParser().parse(request)
         data = Houses.objects.filter(HID=request.POST["HID"])   
-        serializer = HousesSerializer(data,many=True,context={"Somebody":"hi"})
+        serializer = HousesSerializer(data,many=True,context={"request":"hi"})
 #        if serializer.is_valid():
 #            serializer.save()
         return JsonResponse(serializer.data, status=201,safe=False)
