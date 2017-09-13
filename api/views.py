@@ -180,6 +180,39 @@ def Housew(request,dat_id):
         temp[i]["Crops"] = ser.data
     data["Farms"] = temp
     return JsonResponse(data, status=201,safe=False)
+
+def HouseALL(request):
+    data={}
+    house=Houses.objects.all()
+    house=HousesSerializer(house,many=True)
+    temp=house.data
+    for i in range(len(temp)):
+        data[i]={}
+        home=HousesSerializer(Houses.objects.filter(HID=temp[i]["HID"]),many=True)
+        data[i]["Houses"]=home.data
+        members=MembersSerializer(Members.objects.filter(HID=temp[i]["HID"]),many=True)
+        data[i]["Members"]=members.data
+        photos=PhotosSerializer(Photos.objects.filter(HID=temp[i]["HID"]),many=True)
+        data[i]["Photos"]=photos.data
+        videos=VideosSerializer(Videos.objects.filter(HID=temp[i]["HID"]),many=True)
+        data[i]["Videos"]=videos.data
+        audios=AudiosSerializer(Audios.objects.filter(HID=temp[i]["HID"]),many=True)
+        data[i]["Audios"]=audios.data
+        wells = WellsSerializer(Wells.objects.filter(HID=temp[i]["HID"]),many=True)
+        temp2 = wells.data
+        for j in range(len(temp2)):
+            k = temp2[j]["WID"]
+            ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
+            temp2[i]["Yields"] = ser.data
+        data[i]["Wells"] = temp2
+        farms = FarmsSerializer(Farms.objects.filter(HID=temp[i]["HID"]),many=True)
+        temp2 = farms.data
+        for j in range(len(temp2)):
+            k = temp2[j]["FID"]
+            ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
+            temp2[i]["Crops"] = ser.data
+        data[i]["Farms"] = temp2
+    return JsonResponse(data, status=201,safe=False)
         
     
     

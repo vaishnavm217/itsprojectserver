@@ -26,4 +26,5 @@ urlpatterns = [
 	url(r'^wells/',views.snippet_list7),
 	url(r'^wellwater/',views.snippet_list8),
     url(r'^housedat/(?P<dat_id>[0-9]+)/',views.Housew),
+    url(r'^houseall/',views.HouseALL),
 ]
