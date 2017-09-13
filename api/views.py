@@ -180,7 +180,8 @@ def Housew(request,dat_id):
         temp[i]["Crops"] = ser.data
     data["Farms"] = temp
     return JsonResponse(data, status=201,safe=False)
-
+@detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
+@csrf_exempt
 def HouseALL(request):
     data={}
     house=Houses.objects.all()
