@@ -150,23 +150,23 @@ def snippet_list8(request):
         return JsonResponse(serializer.data, status=201,safe=False)
     else:
         return JsonResponse(serializer.errors, status=400)
-def Housew(request,dat_id):
+def Housew(request,vari):
     data = {}
-    house = Houses.objects.filter(HID=dat_id)
+    house = Houses.objects.filter(HID=vari)
     house = HousesSerializer(house,many=True)
     data["Houses"]=house.data
-    members = MembersSerializer(Members.objects.filter(HID=dat_id),many=True)
+    members = MembersSerializer(Members.objects.filter(HID=vari),many=True)
     data["Members"]=members.data
-    photos = PhotosSerializer(Photos.objects.filter(HID=dat_id),many=True)
+    photos = PhotosSerializer(Photos.objects.filter(HID=vari),many=True)
     data["Photos"]=photos.data
-    wells = WellsSerializer(Wells.objects.filter(HID=dat_id),many=True)
+    wells = WellsSerializer(Wells.objects.filter(HID=vari),many=True)
     temp = wells.data
     for i in range(len(temp)):
         k = temp[i]["WID"]
         ser = WellWaterSerializer(WellWater.objects.filter(WID=k),many=True)
         temp[i]["Yields"] = ser.data
     data["Wells"] = temp
-    temp = FarmsSerializer(Farms.objects.filter(HID=dat_id),many=True)
+    temp = FarmsSerializer(Farms.objects.filter(HID=vari),many=True)
     for i in range(len(temp)):
         k = temp[i]["FID"]
         ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
