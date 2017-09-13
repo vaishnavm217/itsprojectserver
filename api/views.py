@@ -167,7 +167,7 @@ def Housew(request,dat_id):
     temp = wells.data
     for i in range(len(temp)):
         k = temp[i]["WID"]
-        ser = YieldsSerializer(WellWater.objects.filter(WID=k),many=True)
+        ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
         temp[i]["Yields"] = ser.data
     data["Wells"] = temp
     temp = FarmsSerializer(Farms.objects.filter(HID=dat_id),many=True)
