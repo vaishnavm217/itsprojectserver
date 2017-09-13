@@ -20,7 +20,7 @@ def snippet_list1(request):
     if request.method == 'POST':
         #data = JSONParser().parse(request)
         data = Houses.objects.filter(HID=request.POST["HID"])   
-        serializer = HousesSerializer(data,many=True)
+        serializer = HousesSerializer(data,many=True,context={"Somebody":"hi"})
 #        if serializer.is_valid():
 #            serializer.save()
         return JsonResponse(serializer.data, status=201,safe=False)
@@ -149,3 +149,16 @@ def snippet_list8(request):
         return JsonResponse(serializer.data, status=201,safe=False)
     else:
         return JsonResponse(serializer.errors, status=400)
+#def Housew(request,dat_id):
+#    data = {}
+#    house = Houses.objects.filter(HID=dat_id)
+#    house = HousesSerializer(house,many=True)
+#    data["Houses"]=house.data
+#    members = MembersSerializer(Members.objects.filter(HID=dat_id),many=True)
+#    data["Members"]=members.data
+#    photos = PhotosSerializer(Photos.objects.filter(HID=dat_id),many=True)
+#    data["Photos"]=photos.data
+#    
+    
+    
+        
