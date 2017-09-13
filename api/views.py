@@ -203,14 +203,14 @@ def HouseALL(request):
         for j in range(len(temp2)):
             k = temp2[j]["WID"]
             ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
-            temp2[i]["Yields"] = ser.data
+            temp2[j]["Yields"] = ser.data
         data[i]["Wells"] = temp2
         farms = FarmsSerializer(Farms.objects.filter(HID=temp[i]["HID"]),many=True)
         temp2 = farms.data
         for j in range(len(temp2)):
             k = temp2[j]["FID"]
             ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
-            temp2[i]["Crops"] = ser.data
+            temp2[j]["Crops"] = ser.data
         data[i]["Farms"] = temp2
     return JsonResponse(data, status=201,safe=False)
         
