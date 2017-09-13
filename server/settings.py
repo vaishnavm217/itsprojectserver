@@ -15,9 +15,9 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from os import environ
-GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('GEOS_LIBRARY_PATH'))
-GDAL_LIBRARY_PATH = "{}/libgdal.so".format(environ.get('GDAL_LIBRARY_PATH'))
-PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('PROJ4_LIBRARY_PATH'))
+GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('LIBRARY_PATH_ITS'))
+GDAL_LIBRARY_PATH = "{}/libgdal.so".format(environ.get('LIBRARY_PATH_ITS'))
+PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('LIBRARY_PATH_ITS'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -26,8 +26,8 @@ SECRET_KEY = '7op^nso$m4jrh99dqy$$8s$5ucl_jem1a=64$!u8gl!22%-z-e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-db_from_env = dj_database_url.config(conn_max_age=500)
-ALLOWED_HOSTS = ['127.0.0.1','farmereverywhere-server.herokuapp.com','blooming-basin-35963.herokuapp.com']
+#db_from_env = dj_database_url.config(conn_max_age=500)
+ALLOWED_HOSTS = ['127.0.0.1','farmereverywhere-server.herokuapp.com','blooming-basin-35963.herokuapp.com','10.0.3.23']  
 
 
 # Application definition
@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db',
-        'USER': 'Vaishnav',
-        'PASSWORD': 'abcdef',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'group1',
+        'USER': 'group1',
+        'PASSWORD': 'group1',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -137,13 +137,13 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
-
+    
 USE_L10N = True
 
 USE_TZ = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-DATABASES['default'].update(db_from_env)
+#DATABASES['default'].update(db_from_env)
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
