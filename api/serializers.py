@@ -1,4 +1,4 @@
-from api.models import Houses, Members, Photos, Videos, Farms, Crops, Wells, WellWater
+from api.models import *
 from rest_framework import serializers
 class HousesSerializer(serializers.ModelSerializer):
     class Meta:
