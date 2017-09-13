@@ -24,7 +24,7 @@ def snippet_list1(request):
 #        if serializer.is_valid():
 #            serializer.save()
         y=serializer.data
-        y["something"]="yo"
+        y[0]["lol"]="yo"
         return JsonResponse(y, status=201,safe=False)
     else:
         return JsonResponse(serializer.errors, status=400)
