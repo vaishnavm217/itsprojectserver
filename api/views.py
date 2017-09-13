@@ -150,6 +150,8 @@ def snippet_list8(request):
         return JsonResponse(serializer.data, status=201,safe=False)
     else:
         return JsonResponse(serializer.errors, status=400)
+@detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
+@csrf_exempt
 def Housew(request,dat_id):
     data = {}
     house = Houses.objects.filter(HID=dat_id)
