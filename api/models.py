@@ -30,7 +30,7 @@ class Photos(models.Model):
 class Videos(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     VID=models.AutoField(primary_key=True)
-    file=models.FileField(upload_to = 'uploaded_video/')
+    file=models.ImageField(upload_to = 'uploaded_video/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.VID)
 
