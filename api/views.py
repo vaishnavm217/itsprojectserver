@@ -7,8 +7,8 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from api.models import Houses, Members, Photos, Videos, Farms, Crops, Wells, WellWater
-from .serializers import HousesSerializer, MembersSerializer, PhotosSerializer, VideosSerializer, FarmsSerializer, CropsSerializer, WellsSerializer, WellWaterSerializer
+from api.models import Houses, Members, Photos, Videos, Farms, Crops, Wells, Yields, Audios
+from .serializers import HousesSerializer, MembersSerializer, PhotosSerializer, VideosSerializer, FarmsSerializer, CropsSerializer, WellsSerializer, YieldsSerializer,AudiosSerializer
 
 
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
@@ -143,8 +143,8 @@ def snippet_list8(request):
     """
     if request.method == 'POST':
         #data = JSONParser().parse(request)
-        data = WellWater.objects.filter(WID=request.POST['HID'])
-        serializer = WellWaterSerializer(data,many=True)
+        data = Yields.objects.filter(WID=request.POST['HID'])
+        serializer = YieldsSerializer(data,many=True)
 #        if serializer.is_valid():
 #            serializer.save()
         return JsonResponse(serializer.data, status=201,safe=False)
@@ -159,11 +159,15 @@ def Housew(request,dat_id):
     data["Members"]=members.data
     photos = PhotosSerializer(Photos.objects.filter(HID=dat_id),many=True)
     data["Photos"]=photos.data
+    videos = VideosSerializer(Photos.objects.filter(HID=dat_id),many=True)
+    data["Videos"]=videos.data
+    audios = AudiosSerializer(Photos.objects.filter(HID=dat_id),many=True)
+    data["Audios"]=audios.data
     wells = WellsSerializer(Wells.objects.filter(HID=dat_id),many=True)
     temp = wells.data
     for i in range(len(temp)):
         k = temp[i]["WID"]
-        ser = WellWaterSerializer(WellWater.objects.filter(WID=k),many=True)
+        ser = YieldsSerializer(WellWater.objects.filter(WID=k),many=True)
         temp[i]["Yields"] = ser.data
     data["Wells"] = temp
     temp = FarmsSerializer(Farms.objects.filter(HID=dat_id),many=True)

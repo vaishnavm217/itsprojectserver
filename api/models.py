@@ -23,7 +23,7 @@ class Members(models.Model):
 class Photos(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     PHID=models.AutoField(primary_key=True)
-    photo=models.FileField(upload_to = 'uploaded_images/')
+    file=models.FileField(upload_to = 'uploaded_images/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.PHID)
 
@@ -36,7 +36,7 @@ class Videos(models.Model):
 
 class Audios(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
-    VID=models.AutoField(primary_key=True)
+    AID=models.AutoField(primary_key=True)
     file=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.VID)
@@ -54,7 +54,7 @@ class Farms(models.Model):
         super().save(self)
 
 class Crops(models.Model):
-    Name=model.CharField(max_length=50,default="Rice")
+    Name=models.CharField(max_length=50,default="Rice")
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
     Year=models.IntegerField()
     seasons=(('S',"Summer"),('W',"Winter"),('M',"Monsoon"))
@@ -70,7 +70,7 @@ class Wells(models.Model):
     def __str__(self):
         return "%s" %(self.WID)
 
-class WellWater(models.Model):
+class Yields(models.Model):
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
     Yield=models.FloatField(default=0.0)
     measured_date=models.DateField(default=datetime.date.today)
