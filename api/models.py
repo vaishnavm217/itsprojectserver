@@ -30,7 +30,14 @@ class Photos(models.Model):
 class Videos(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     VID=models.AutoField(primary_key=True)
-    URL=models.CharField(max_length=200)
+    file=models.FileField(upload_to = 'uploaded_video/')
+    def __str__(self):
+        return "%s : %s" % (self.HID,self.VID)
+
+class Audios(models.Model):
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+    VID=models.AutoField(primary_key=True)
+    file=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.VID)
 
@@ -47,6 +54,7 @@ class Farms(models.Model):
         super().save(self)
 
 class Crops(models.Model):
+    Name=model.CharField(max_length=50,default="Rice")
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
     Year=models.IntegerField()
     seasons=(('S',"Summer"),('W',"Winter"),('M',"Monsoon"))
@@ -64,7 +72,6 @@ class Wells(models.Model):
 
 class WellWater(models.Model):
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
-    Year=models.IntegerField()
     Yield=models.FloatField(default=0.0)
     measured_date=models.DateField(default=datetime.date.today)
     def __str__(self):
