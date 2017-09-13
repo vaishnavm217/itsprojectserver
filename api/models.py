@@ -39,7 +39,7 @@ class Audios(models.Model):
     AID=models.AutoField(primary_key=True)
     file=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
-        return "%s : %s" % (self.HID,self.VID)
+        return "%s : %s" % (self.HID,self.AID)
 
 class Farms(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
