@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import dj_database_url
+#import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from os import environ
@@ -27,7 +27,11 @@ SECRET_KEY = '7op^nso$m4jrh99dqy$$8s$5ucl_jem1a=64$!u8gl!22%-z-e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #db_from_env = dj_database_url.config(conn_max_age=500)
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['127.0.0.1','farmereverywhere-server.herokuapp.com','blooming-basin-35963.herokuapp.com','10.0.3.23']  
+=======
+ALLOWED_HOSTS = ['127.0.0.1','farmereverywhere-server.herokuapp.com','blooming-basin-35963.herokuapp.com','10.0.3.23']
+>>>>>>> itsserver
 
 
 # Application definition
@@ -89,12 +93,17 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
    'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'group1',
         'USER': 'group1',
         'PASSWORD': '1',
         'HOST': 'localhost',
         'PORT': '',
+=======
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+>>>>>>> itsserver
     }
 }
 
@@ -141,9 +150,14 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+<<<<<<< HEAD
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #DATABASES['default'].update(db_from_env)
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+=======
+#DATABASES['default'].update(db_from_env)
+
+>>>>>>> itsserver
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
