@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url,include
-from django.contrib import admin
 from api import views 
 
 urlpatterns = [
@@ -26,4 +25,6 @@ urlpatterns = [
 	url(r'^crops/',views.snippet_list6),
 	url(r'^wells/',views.snippet_list7),
 	url(r'^wellwater/',views.snippet_list8),
+    url(r'^housedat/(?P<dat_id>[0-9]+)/',views.Housew),
+    url(r'^houseall/',views.HouseALL),
 ]
