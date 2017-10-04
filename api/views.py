@@ -19,7 +19,7 @@ def snippet_list1(request):
     """
     if request.method == 'POST':
         #data = JSONParser().parse(request)
-        data = Houses.objects.filter(HID=request.POST["HID"])   
+        data = Houses.objects.filter(HID=request.POST["HID"])
         serializer = HousesSerializer(data,many=True)
 #        if serializer.is_valid():
 #            serializer.save()
@@ -126,7 +126,7 @@ def snippet_list7(request):
     """
     if request.method == 'POST':
         #data = JSONParser().parse(request)
-        data = Wells.objects.filter(WID=request.POST['HID'])
+        data = Wells.objects.all()
         serializer = WellsSerializer(data,many=True)
 #        if serializer.is_valid():
 #            serializer.save()
@@ -214,9 +214,3 @@ def HouseALL(request):
             temp2[j]["Crops"] = ser.data
         data[i]["Farms"] = temp2
     return JsonResponse(data, status=201,safe=False)
-        
-    
-    
-    
-    
-        
