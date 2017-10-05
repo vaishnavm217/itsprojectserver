@@ -209,3 +209,7 @@ def HouseALL(request):
             temp2[j]["Crops"] = ser.data
         data[i]["Farms"] = temp2
     return JsonResponse(data, status=201,safe=False)
+def yieldALL(request):
+    data=Yields.objects.all()
+    data = YieldsSerializer(data,many=True)
+    return JsonResponse(data.data, status=201,safe=False)
