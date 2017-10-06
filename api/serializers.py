@@ -34,7 +34,7 @@ class FarmsSerializer(serializers.ModelSerializer):
 class CropsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Crops
-        fields = ('Name','FID', 'Year', 'Seasons')
+        fields = ('Name','FID', 'Year', 'Seasons','Area')
 
 class WellsSerializer(serializers.ModelSerializer):
     class Meta:
