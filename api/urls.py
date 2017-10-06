@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url,include
-from api import views 
+from api import views
 
 urlpatterns = [
-    	url(r'^households/',views.snippet_list1),
+    url(r'^households/',views.snippet_list1),
 	url(r'^members/',views.snippet_list2),
 	url(r'^photos/',views.snippet_list3),
 	url(r'^videos/',views.snippet_list4),
@@ -27,4 +27,5 @@ urlpatterns = [
 	url(r'^wellwater/',views.snippet_list8),
     url(r'^housedat/(?P<dat_id>[0-9]+)/',views.Housew),
     url(r'^houseall/',views.HouseALL),
+    url(r'^yield/',views.yieldALL),
 ]
