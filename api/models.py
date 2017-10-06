@@ -59,6 +59,7 @@ class Crops(models.Model):
     Year=models.IntegerField()
     seasons=(('S',"Summer"),('W',"Winter"),('M',"Monsoon"))
     Seasons=models.CharField(max_length=20,choices=seasons)
+    Area=models.DecimalField(max_digits=7,decimal_places=4)
     def __str__(self):
         return "%s : %s" %(self.FID,self.Year)
 
