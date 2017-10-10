@@ -65,9 +65,13 @@ class Yields(models.Model):
     measured_date=models.DateTimeField(default=datetime.datetime.now())
     def __str__(self):
         return "%s : %s" %(self.WID,self.measured_date)
-    def save(self):
+    def clean(self):
         if(self.Yield>self.WID.Depth):
             raise ValidationError("Yield more than Depth. Depth:"+str(self.WID.Depth))
+
+
+    def save(self):
+        self.full_clean()
         super().save(self)
         temp = Yields.objects.filter(WID=self.WID)
         avg = sum([i.Yield for i in temp])/len(temp)
