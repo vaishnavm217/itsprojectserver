@@ -83,9 +83,12 @@ class Photos(models.Model):
     photo=models.ImageField(upload_to = 'uploaded_images/')
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
-    def image_tag(self):    
-        return mark_safe("<img src='/media/{}' style='width:50%'>".format(self.photo))  
-    image_tag.short_description = 'photo'
+    def image_tag(self):
+        if self.photo:
+            return mark_safe("<img src='/media/{}' style='width:50%'>".format(self.photo))
+        else:
+            return mark_safe("<p>No image Uploaded</p>")
+    image_tag.short_description = ''
     @property
     def ID(self):
         if self.Type=="WID":
