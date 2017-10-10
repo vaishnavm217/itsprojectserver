@@ -59,7 +59,7 @@ class Yields(models.Model):
         super().save(self)
         temp = Yields.objects.filter(WID=self.WID)
         avg = sum([i.Yield for i in temp])/len(temp)
-        wellt = Wells.object.filter(WID=self.WID)
+        wellt = Wells.objects.filter(WID=self.WID)
         wellt.AvgYield=avg
         wellt.save()
 
