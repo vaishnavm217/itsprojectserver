@@ -61,11 +61,11 @@ class Yields(models.Model):
 
 
 class Photos(models.Model):
-    type=['WID','FID','HID']
-    Type=models.CharField(max_length=3,choices=type)
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
-    WID=models.ForeignKey(Farms,to_field='WID',on_delete=models.CASCADE)
-    FID=models.ForeignKey(Wells,to_field='FID',on_delete=models.CASCADE)
+    types=(('WID','WID'),('FID','FID'),('HID','HID'))
+    Type=models.CharField(max_length=3,choices=types)
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
+    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
+    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
     PHID=models.AutoField(primary_key=True)
     file=models.FileField(upload_to = 'uploaded_images/')
     def __str__(self):
@@ -80,9 +80,11 @@ class Photos(models.Model):
             return self.FID
 
 class Videos(models.Model):
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
-    WID=models.ForeignKey(Farms,to_field='WID',on_delete=models.CASCADE)
-    FID=models.ForeignKey(Wells,to_field='FID',on_delete=models.CASCADE)
+    types=(('WID','WID'),('FID','FID'),('HID','HID'))
+    Type=models.CharField(max_length=3,choices=types)
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
+    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
+    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
 
     VID=models.AutoField(primary_key=True)
     file=models.ImageField(upload_to = 'uploaded_video/')
@@ -98,9 +100,11 @@ class Videos(models.Model):
             return self.FID
 
 class Audios(models.Model):
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
-    WID=models.ForeignKey(Farms,to_field='WID',on_delete=models.CASCADE)
-    FID=models.ForeignKey(Wells,to_field='FID',on_delete=models.CASCADE)
+    types=(('WID','WID'),('FID','FID'),('HID','HID'))
+    Type=models.CharField(max_length=3,choices=types)
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
+    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
+    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
     AID=models.AutoField(primary_key=True)
     file=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
