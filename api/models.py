@@ -1,6 +1,15 @@
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 import datetime
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+
+def validate_yield(value,self):
+    if value % 2 != 0:
+        raise ValidationError(
+            _('%(value)s is not an even number'),
+            params={'value': value},
+        )
 
 class Houses(models.Model):
     HID=models.AutoField(primary_key=True)
@@ -56,6 +65,8 @@ class Yields(models.Model):
     def __str__(self):
         return "%s : %s" %(self.WID,self.measured_date)
     def save(self):
+        if(self.Yield>self.WID.Depth):
+            raise ValueError("Yield more than Depth. Depth:"+str(self.WID.Depth))
         super().save(self)
         temp = Yields.objects.filter(WID=self.WID)
         avg = sum([i.Yield for i in temp])/len(temp)
