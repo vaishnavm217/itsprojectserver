@@ -85,7 +85,7 @@ class Photos(models.Model):
         return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
     def image_tag(self):
         if self.photo:
-            return mark_safe("<img src='/media/%s' style='width:50%'>" % (self.photo))
+            return mark_safe("<img src='/media%s' style='width:50%'>" % (self.photo))
         else:
             return mark_safe("<p>Not uploaded %s</p>" % ("yet"))
     image_tag.short_description = 'photo'
