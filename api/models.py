@@ -4,12 +4,13 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-def validate_yield(value,self):
-    if value % 2 != 0:
+def validate_yield(self,data):
+    if(data['Yield']>self.WID.Depth):
         raise ValidationError(
-            _('%(value)s is not an even number'),
-            params={'value': value},
+            _('Yield cannot be greater than Depth (%(value)s)'),
+            params={'value': self.WID.Depth},
         )
+
 
 class Houses(models.Model):
     HID=models.AutoField(primary_key=True)
@@ -60,7 +61,7 @@ class Wells(models.Model):
 
 class Yields(models.Model):
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
-    Yield=models.FloatField(default=0.0)
+    Yield=models.FloatField(default=0.0,validators=[validate_yield])
     measured_date=models.DateTimeField(default=datetime.datetime.now())
     def __str__(self):
         return "%s : %s" %(self.WID,self.measured_date)
