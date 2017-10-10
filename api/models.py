@@ -21,25 +21,58 @@ class Members(models.Model):
 
 
 class Photos(models.Model):
+    type=['WID','FID','HID']
+    Type=models.CharField(max_length=3,choices=type)
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+    WID=models.ForeignKey(Farms,to_field='WID',on_delete=models.CASCADE)
+    FID=models.ForeignKey(Wells,to_field='FID',on_delete=models.CASCADE)
     PHID=models.AutoField(primary_key=True)
     file=models.FileField(upload_to = 'uploaded_images/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.PHID)
+    @property
+    def ID(self):
+        if self.Type=="WID":
+            return self.WID
+        elif self.Type=="HID":
+            return self.HID
+        else:
+            return self.FID
 
 class Videos(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+    WID=models.ForeignKey(Farms,to_field='WID',on_delete=models.CASCADE)
+    FID=models.ForeignKey(Wells,to_field='FID',on_delete=models.CASCADE)
+
     VID=models.AutoField(primary_key=True)
     file=models.ImageField(upload_to = 'uploaded_video/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.VID)
+    @property
+    def ID(self):
+        if self.Type=="WID":
+            return self.WID
+        elif self.Type=="HID":
+            return self.HID
+        else:
+            return self.FID
 
 class Audios(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+    WID=models.ForeignKey(Farms,to_field='WID',on_delete=models.CASCADE)
+    FID=models.ForeignKey(Wells,to_field='FID',on_delete=models.CASCADE)
     AID=models.AutoField(primary_key=True)
     file=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
         return "%s : %s" % (self.HID,self.AID)
+    @property
+    def ID(self):
+        if self.Type=="WID":
+            return self.WID
+        elif self.Type=="HID":
+            return self.HID
+        else:
+            return self.FID
 
 class Farms(models.Model):
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
@@ -52,6 +85,7 @@ class Farms(models.Model):
         temp=self.plot.transform(27700,clone=True)
         self.area=temp.area
         super().save(self)
+
 
 class Crops(models.Model):
     Name=models.CharField(max_length=50,default="Rice")
@@ -68,6 +102,7 @@ class Wells(models.Model):
     WID=models.AutoField(primary_key=True)
     point=models.PointField(default=Point(1,1))
     AvgYield=models.DecimalField(max_digits=7,decimal_places=4)
+    Depth=models.DecimalField(max_digits=7,decimal_places=4)
     def __str__(self):
         return "%s" %(self.WID)
 
