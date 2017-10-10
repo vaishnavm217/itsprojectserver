@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 class ImageAdmin(admin.OSMGeoAdmin):
     # explicitly reference fields to be shown, note image_tag is read-only
-    fields = ( 'image_tag', )
+    fields = ( 'Type','HID','FID','WID','image_tag', )
     readonly_fields = ('image_tag',)
 admin.site.register(Houses,admin.OSMGeoAdmin)
 admin.site.register(Members,admin.OSMGeoAdmin)
