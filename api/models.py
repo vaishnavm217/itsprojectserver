@@ -19,6 +19,46 @@ class Members(models.Model):
     def __str__(self):
         return "%s : %s" %(self.PID,self.Name)
 
+class Farms(models.Model):
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+    FID=models.AutoField(primary_key=True)
+    plot=models.PolygonField(srid=4326,geography=True)
+    area=models.FloatField(default=0.0)
+    def __str__(self):
+        return "%s" % (self.FID)
+    def save(self):
+        temp=self.plot.transform(27700,clone=True)
+        self.area=temp.area
+        super().save(self)
+
+
+class Crops(models.Model):
+    Name=models.CharField(max_length=50,default="Rice")
+    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
+    Year=models.IntegerField()
+    seasons=(('S',"Summer"),('W',"Winter"),('M',"Monsoon"))
+    Seasons=models.CharField(max_length=20,choices=seasons)
+    Area=models.DecimalField(max_digits=7,decimal_places=4)
+    def __str__(self):
+        return "%s : %s" %(self.FID,self.Year)
+
+class Wells(models.Model):
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+    WID=models.AutoField(primary_key=True)
+    point=models.PointField(default=Point(1,1))
+    AvgYield=models.DecimalField(max_digits=7,decimal_places=4)
+    Depth=models.DecimalField(max_digits=7,decimal_places=4)
+    def __str__(self):
+        return "%s" %(self.WID)
+
+class Yields(models.Model):
+    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
+    Yield=models.FloatField(default=0.0)
+    measured_date=models.DateField(default=datetime.date.today)
+    def __str__(self):
+        return "%s : %s" %(self.WID,self.WID)
+
+
 
 class Photos(models.Model):
     type=['WID','FID','HID']
@@ -73,42 +113,3 @@ class Audios(models.Model):
             return self.HID
         else:
             return self.FID
-
-class Farms(models.Model):
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
-    FID=models.AutoField(primary_key=True)
-    plot=models.PolygonField(srid=4326,geography=True)
-    area=models.FloatField(default=0.0)
-    def __str__(self):
-        return "%s" % (self.FID)
-    def save(self):
-        temp=self.plot.transform(27700,clone=True)
-        self.area=temp.area
-        super().save(self)
-
-
-class Crops(models.Model):
-    Name=models.CharField(max_length=50,default="Rice")
-    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
-    Year=models.IntegerField()
-    seasons=(('S',"Summer"),('W',"Winter"),('M',"Monsoon"))
-    Seasons=models.CharField(max_length=20,choices=seasons)
-    Area=models.DecimalField(max_digits=7,decimal_places=4)
-    def __str__(self):
-        return "%s : %s" %(self.FID,self.Year)
-
-class Wells(models.Model):
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
-    WID=models.AutoField(primary_key=True)
-    point=models.PointField(default=Point(1,1))
-    AvgYield=models.DecimalField(max_digits=7,decimal_places=4)
-    Depth=models.DecimalField(max_digits=7,decimal_places=4)
-    def __str__(self):
-        return "%s" %(self.WID)
-
-class Yields(models.Model):
-    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
-    Yield=models.FloatField(default=0.0)
-    measured_date=models.DateField(default=datetime.date.today)
-    def __str__(self):
-        return "%s : %s" %(self.WID,self.WID)
