@@ -88,7 +88,6 @@ class Photos(models.Model):
             return mark_safe("<img src='/media/{}' style='width:50%'>".format(self.photo))
         else:
             return mark_safe("<p>No image Uploaded</p>")
-    image_tag.short_description = ''
     @property
     def ID(self):
         if self.Type=="WID":
@@ -108,6 +107,11 @@ class Videos(models.Model):
     video=models.FileField(upload_to = 'uploaded_video/')
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.VID)
+    def image_tag(self):
+        if self.audio:
+            return mark_safe("<video controls  style='width:50%'><source src='/media/{}'></video>".format(self.photo))
+        else:
+            return mark_safe("<p>No image Uploaded</p>")
     @property
     def ID(self):
         if self.Type=="WID":
@@ -127,6 +131,11 @@ class Audios(models.Model):
     audio=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.AID)
+    def image_tag(self):
+        if self.audio:
+            return mark_safe("<audio controls><source src='/media/{}'></audio>".format(self.audio))
+        else:
+            return mark_safe("<p>No image Uploaded</p>")
     @property
     def ID(self):
         if self.Type=="WID":
