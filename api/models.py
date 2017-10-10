@@ -29,7 +29,7 @@ class Farms(models.Model):
     def save(self):
         temp=self.plot.transform(27700,clone=True)
         self.area=temp.area
-
+        super().save(self)
 class Crops(models.Model):
     Name=models.CharField(max_length=50,default="Rice")
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
