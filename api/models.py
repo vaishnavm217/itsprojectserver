@@ -29,13 +29,6 @@ class Farms(models.Model):
     def save(self):
         temp=self.plot.transform(27700,clone=True)
         self.area=temp.area
-        super().save(self)
-super().save(self)
-    	temp = Yields.objects.filter(WID=self.WID)
-    	avg = sum([i.Yield for i in temp])/len(temp)
-    	wellt = Wells.object.filter(WID=self.WID)
-    	wellt.AvgYield=avg
-    	wellt.save()
 
 class Crops(models.Model):
     Name=models.CharField(max_length=50,default="Rice")
