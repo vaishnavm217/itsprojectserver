@@ -60,8 +60,9 @@ class Yields(models.Model):
         temp = Yields.objects.filter(WID=self.WID)
         avg = sum([i.Yield for i in temp])/len(temp)
         wellt = Wells.objects.filter(WID=self.WID)
-        wellt.AvgYield=avg
-        wellt.save()
+        for i in wellt:
+            i.AvgYield=avg
+            i.save()
 
 class Photos(models.Model):
     types=(('WID','WID'),('FID','FID'),('HID','HID'))
