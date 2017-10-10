@@ -83,8 +83,8 @@ class Photos(models.Model):
     photo=models.ImageField(upload_to = 'uploaded_images/')
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
-    def image_tag(self):
-        return mark_safe("<img src='/media%s'>" % (self.photo))  
+    def image_tag(self):    
+        return mark_safe("<img src='/media/%s'>" % (self.photo))  
     image_tag.short_description = 'photo'
     @property
     def ID(self):
