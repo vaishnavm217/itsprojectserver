@@ -63,12 +63,12 @@ class Yields(models.Model):
     def __str__(self):
         return "%s : %s" %(self.WID,self.measured_date)
     def save(self):
-    	super().save(self)
-    	temp = Yields.objects.filter(WID=self.WID)
-    	avg = sum([i.Yield for i in temp])/len(temp)
-    	wellt = Wells.object.filter(WID=self.WID)
-    	wellt.AvgYield=avg
-    	wellt.save()
+        super().save(self)
+        temp = Yields.objects.filter(WID=self.WID)
+        avg = sum([i.Yield for i in temp])/len(temp)
+        wellt = Wells.object.filter(WID=self.WID)
+        wellt.AvgYield=avg
+        wellt.save()
 
 class Photos(models.Model):
     types=(('WID','WID'),('FID','FID'),('HID','HID'))
