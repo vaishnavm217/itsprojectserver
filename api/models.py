@@ -74,15 +74,18 @@ class Yields(models.Model):
             i.save()
 
 class Photos(models.Model):
-    types=(('WID','WID'),('FID','FID'),('HID','HID'))
+    types=(('WID','Well'),('FID','Farm',),('HID','House'))
     Type=models.CharField(max_length=3,choices=types)
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
     PHID=models.AutoField(primary_key=True)
-    file=models.ImageField(upload_to = 'uploaded_images/')
+    photo=models.ImageField(upload_to = 'uploaded_images/')
     def __str__(self):
-        return "%s : %s" % (self.HID,self.PHID)
+        return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
+    def image_tag(self):
+        return mark_safe("<img src='%s'>" % (self.photo))  
+    image_tag.short_description = 'photo'
     @property
     def ID(self):
         if self.Type=="WID":
@@ -93,15 +96,15 @@ class Photos(models.Model):
             return self.FID
 
 class Videos(models.Model):
-    types=(('WID','WID'),('FID','FID'),('HID','HID'))
+    types=(('WID','Well'),('FID','Farm',),('HID','House'))
     Type=models.CharField(max_length=3,choices=types)
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
     VID=models.AutoField(primary_key=True)
-    file=models.FileField(upload_to = 'uploaded_video/')
+    video=models.FileField(upload_to = 'uploaded_video/')
     def __str__(self):
-        return "%s : %s" % (self.HID,self.VID)
+        return "%s-%s : %s" % (self.Type,self.ID,self.VID)
     @property
     def ID(self):
         if self.Type=="WID":
@@ -112,15 +115,15 @@ class Videos(models.Model):
             return self.FID
 
 class Audios(models.Model):
-    types=(('WID','WID'),('FID','FID'),('HID','HID'))
+    types=(('WID','Well'),('FID','Farm',),('HID','House'))       
     Type=models.CharField(max_length=3,choices=types)
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
     AID=models.AutoField(primary_key=True)
-    file=models.FileField(upload_to = 'uploaded_audio/')
+    audio=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
-        return "%s : %s" % (self.HID,self.AID)
+        return "%s-%s : %s" % (self.Type,self.ID,self.AID)
     @property
     def ID(self):
         if self.Type=="WID":
