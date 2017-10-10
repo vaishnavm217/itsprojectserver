@@ -3,7 +3,7 @@ from django.contrib.gis.geos import Point
 import datetime
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from django.utils.safestring import mark_safe
+from django.utils.safestring import mark_safe   
 
 class Houses(models.Model):
     HID=models.AutoField(primary_key=True)
@@ -76,9 +76,9 @@ class Yields(models.Model):
 class Photos(models.Model):
     types=(('WID','Well'),('FID','Farm',),('HID','House'))
     Type=models.CharField(max_length=3,choices=types)
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
-    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
-    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True,null=True)
+    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True,null=True)
+    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True,null=True)
     PHID=models.AutoField(primary_key=True)
     photo=models.ImageField(upload_to = 'uploaded_images/')
     def __str__(self):
@@ -98,9 +98,9 @@ class Photos(models.Model):
 class Videos(models.Model):
     types=(('WID','Well'),('FID','Farm',),('HID','House'))
     Type=models.CharField(max_length=3,choices=types)
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
-    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
-    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True,null=True)
+    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True,null=True)
+    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True,null=True)
     VID=models.AutoField(primary_key=True)
     video=models.FileField(upload_to = 'uploaded_video/')
     def __str__(self):
@@ -117,9 +117,9 @@ class Videos(models.Model):
 class Audios(models.Model):
     types=(('WID','Well'),('FID','Farm',),('HID','House'))       
     Type=models.CharField(max_length=3,choices=types)
-    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True)
-    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
-    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
+    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True,null=True)
+    FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True,null=True)
+    WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True,null=True)
     AID=models.AutoField(primary_key=True)
     audio=models.FileField(upload_to = 'uploaded_audio/')
     def __str__(self):
