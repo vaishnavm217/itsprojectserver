@@ -3,7 +3,7 @@ from django.contrib.gis.geos import Point
 import datetime
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from django.utils import mark_safe
+from django.utils.safestring import mark_safe
 
 class Houses(models.Model):
     HID=models.AutoField(primary_key=True)
