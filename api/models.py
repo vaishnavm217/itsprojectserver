@@ -84,7 +84,10 @@ class Photos(models.Model):
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
     def image_tag(self):
-        return mark_safe("<img src='/media%s'>" % (self.photo))  
+        if self.photo:
+            return mark_safe("<img src='/media/%s' style='width:50%'>" % (self.photo))
+        else:
+            return mark_safe("")
     image_tag.short_description = 'photo'
     @property
     def ID(self):
