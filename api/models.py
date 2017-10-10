@@ -36,7 +36,7 @@ class Crops(models.Model):
     Year=models.IntegerField()
     seasons=(('S',"Summer"),('W',"Winter"),('M',"Monsoon"))
     Seasons=models.CharField(max_length=20,choices=seasons)
-    Area=models.DecimalField(max_digits=7,decimal_places=4)
+    Area=models.FloatField(default=0.0)
     def __str__(self):
         return "%s : %s" %(self.FID,self.Year)
 
@@ -44,8 +44,8 @@ class Wells(models.Model):
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
     WID=models.AutoField(primary_key=True)
     point=models.PointField(default=Point(1,1))
-    AvgYield=models.DecimalField(max_digits=7,decimal_places=4,default=0)
-    Depth=models.DecimalField(max_digits=7,decimal_places=4)
+    AvgYield=models.FloatField(default=0.0)
+    Depth=models.FloatField(default=0.0)
     def __str__(self):
         return "%s" %(self.WID)
 
