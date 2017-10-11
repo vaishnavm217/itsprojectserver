@@ -91,14 +91,6 @@ class Photos(models.Model):
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True,null=True)
     PHID=models.AutoField(primary_key=True)
     photo=models.ImageField(upload_to = 'uploaded_images/')
-    def __str__(self):
-        return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
-    def image_tag(self):
-        if self.photo:
-            return mark_safe("<img src='/media/{}' style='width:50%'>".format(self.photo))
-        else:
-            return mark_safe("<p>No image Uploaded</p>")
-    image_tag.short_description = 'Preview'
     @property
     def ID(self):
         if self.Type=="WID":
@@ -107,6 +99,15 @@ class Photos(models.Model):
             return self.HID
         else:
             return self.FID
+    def __str__(self):
+        return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
+    def image_tag(self):
+        if self.photo:
+            return mark_safe("<img src='/media/{}' style='width:50%'>".format(self.photo))
+        else:
+            return mark_safe("<p>No image Uploaded</p>")
+    image_tag.short_description = 'Preview'
+    
 
 class Videos(models.Model):
     types=(('WID','Well'),('FID','Farm',),('HID','House'))
