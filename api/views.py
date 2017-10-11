@@ -148,32 +148,43 @@ def snippet_list8(request):
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
 def Housew(request,dat_id):
-    # data = {}
-    # house = Houses.objects.filter(HID=dat_id)
-    # house = HousesSerializer(house,many=True)
-    # data["Houses"]=house.data
-    # members = MembersSerializer(Members.objects.filter(HID=dat_id),many=True)
-    # data["Members"]=members.data
-    # photos = PhotosSerializer(Photos.objects.filter(HID=dat_id),many=True)
-    # data["Photos"]=photos.data
-    # videos = VideosSerializer(Photos.objects.filter(HID=dat_id),many=True)
-    # data["Videos"]=videos.data
-    # audios = AudiosSerializer(Photos.objects.filter(HID=dat_id),many=True)
-    # data["Audios"]=audios.data
-    # wells = WellsSerializer(Wells.objects.filter(HID=dat_id),many=True)
-    # temp = wells.data
-    # for i in range(len(temp)):
-    #     k = temp[i]["WID"]
-    #     ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
-    #     temp[i]["Yields"] = ser.data
-    # data["Wells"] = temp
-    # temp = FarmsSerializer(Farms.objects.filter(HID=dat_id),many=True)
-    # temp = temp.data
-    # for i in range(len(temp)):
-    #     k = temp[i]["FID"]
-    #     ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
-    #     temp[i]["Crops"] = ser.data
-    # data["Farms"] = temp
+    data={}  
+    home=HousesSerializer(Houses.objects.filter(HID=dat_id),many=True)
+    data["Houses"]=home.data
+    members=MembersSerializer(Members.objects.filter(HID=dat_id),many=True)
+    data["Members"]=members.data
+    farms = FarmsSerializer(Farms.objects.filter(HID=dat_id),many=True)
+    temp2 = farms.data
+    for j in range(len(temp2)):
+        k = temp2[j]["FID"]
+        ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
+        wells = WellsSerializer(Wells.objects.filter(FID=k),many=True)
+        temp5 = wells.data
+        for j1 in range(len(temp5)):
+            k = temp5[j1]["WID"]
+            ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
+            pho = PhotosSerializer(Photos.objects.filter(Type="WID",WID__in=[obj.WID for obj in Photos.objects.filter(Type="WID") if obj.ID==k]),many=True)
+            vid = VideosSerializer(Videos.objects.filter(Type="WID",WID__in=[obj.WID for obj in Videos.objects.filter(Type="WID") if obj.ID==k]),many=True)
+            aud = AudiosSerializer(Audios.objects.filter(Type="WID",WID__in=[obj.WID for obj in Audios.objects.filter(Type="WID") if obj.ID==k]),many=True)
+            temp5[j1]["Yields"] = ser.data
+            temp5[j1]["Photos"] = pho.data
+            temp5[j1]["Audios"] = aud.data
+            temp5[j1]["Videos"] = vid.data
+        pho = PhotosSerializer(Photos.objects.filter(Type="FID",FID__in=[obj.FID for obj in Photos.objects.filter(Type="FID") if obj.ID==k]),many=True)
+        vid = VideosSerializer(Videos.objects.filter(Type="FID",FID__in=[obj.FID for obj in Videos.objects.filter(Type="FID") if obj.ID==k]),many=True)
+        aud = AudiosSerializer(Audios.objects.filter(Type="FID",FID__in=[obj.FID for obj in Audios.objects.filter(Type="FID") if obj.ID==k]),many=True)
+        temp2[j]["Crops"] = ser.data
+        temp2[j]["Photos"] = pho.data
+        temp2[j]["Audios"] = aud.data
+        temp2[j]["Videos"] = vid.data
+        temp2[j]["Wells"] = temp5
+    data["Farms"] = temp2
+    photos=PhotosSerializer(Photos.objects.filter(Type="HID",HID__in=[obj.HID for obj in Photos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
+    data["Photos"]=photos.data
+    videos=VideosSerializer(Videos.objects.filter(Type="HID",HID__in=[obj.HID for obj in Videos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
+    data["Videos"]=videos.data
+    audios=AudiosSerializer(Audios.objects.filter(Type="HID",HID__in=[obj.HID for obj in Audios.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
+    data["Audios"]=audios.data
     return JsonResponse({}, status=201,safe=False)
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
