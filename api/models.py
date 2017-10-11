@@ -95,11 +95,11 @@ class Photos(models.Model):
     @property
     def ID(self):
         if self.Type=="WID":
-            return self.WID
+            return self.WID.WID
         elif self.Type=="HID":
-            return self.HID
+            return self.HID.HID
         else:
-            return self.FID
+            return self.FID.FID
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.PHID)
     def image_tag(self):
@@ -129,11 +129,11 @@ class Videos(models.Model):
     @property
     def ID(self):
         if self.Type=="WID":
-            return self.WID
+            return self.WID.WID
         elif self.Type=="HID":
-            return self.HID
+            return self.HID.HID
         else:
-            return self.FID
+            return self.FID.FID
 
 class Audios(models.Model):
     types=(('WID','Well'),('FID','Farm',),('HID','House'))
@@ -154,8 +154,8 @@ class Audios(models.Model):
     @property
     def ID(self):
         if self.Type=="WID":
-            return self.WID
+            return self.WID.WID
         elif self.Type=="HID":
-            return self.HID
+            return self.HID.HID
         else:
-            return self.FID
+            return self.FID.FID
