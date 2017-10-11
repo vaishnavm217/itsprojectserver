@@ -212,7 +212,7 @@ def HouseALL(request):
             temp2[j]["Photos"] = pho.data
             temp2[j]["Audios"] = aud.data
             temp2[j]["Videos"] = vid.data
-            temp2[j]["Wells"] = temp5.data
+            temp2[j]["Wells"] = temp5
         data[i]["Farms"] = temp2
         photos=PhotosSerializer(Photos.objects.filter(Type="HID",HID__in=[obj.HID for obj in Photos.objects.filter(Type="HID") if obj.ID.HID==temp[i]["HID"]]),many=True)
         data[i]["Photos"]=photos.data
