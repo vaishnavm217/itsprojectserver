@@ -198,27 +198,27 @@ def HouseALL(request):
             for j1 in range(len(temp5)):
                 k = temp5[j1]["WID"]
                 ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
-                pho = PhotosSerializer(Photos.objects.filter(Type="WID",ID=k),many=True)
-                vid = VideosSerializer(Videos.objects.filter(Type="WID",ID=k),many=True)
-                aud = AudiosSerializer(Audios.objects.filter(Type="WID",ID=k),many=True)
+                pho = PhotosSerializer([obj for obj in Photos.objects.filter(Type="WID") if obj.ID==k],many=True)
+                vid = VideosSerializer([obj for obj in Videos.objects.filter(Type="WID") if obj.ID==k],many=True)
+                aud = AudiosSerializer([obj for obj in Audios.objects.filter(Type="WID") if obj.ID==k],many=True)
                 temp5[j1]["Yields"] = ser.data
                 temp5[j1]["Photos"] = pho.data
                 temp5[j1]["Audios"] = aud.data
                 temp5[j1]["Videos"] = vid.data
-            pho = PhotosSerializer(Photos.objects.filter(Type="FID",ID=k),many=True)
-            vid = VideosSerializer(Videos.objects.filter(Type="FID",ID=k),many=True)
-            aud = AudiosSerializer(Audios.objects.filter(Type="FID",ID=k),many=True)
+            pho = PhotosSerializer([obj for obj in Photos.objects.filter(Type="FID") if obj.ID==k],many=True)
+            vid = VideosSerializer([obj for obj in Videos.objects.filter(Type="FID") if obj.ID==k],many=True)
+            aud = AudiosSerializer([obj for obj in Audios.objects.filter(Type="FID") if obj.ID==k],many=True)
             temp2[j]["Crops"] = ser.data
             temp2[j]["Photos"] = pho.data
             temp2[j]["Audios"] = aud.data
             temp2[j]["Videos"] = vid.data
             temp2[j]["Wells"] = temp5
         data[i]["Farms"] = temp2
-        photos1=PhotosSerializer(Photos.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
+        photos1=PhotosSerializer([obj for obj in Photos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]],many=True)
         data[i]["Photos"]=photos.data
-        videos=VideosSerializer(Videos.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
+        videos=VideosSerializer([obj for obj in Videos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]],many=True)
         data[i]["Videos"]=videos.data
-        audios=AudiosSerializer(Audios.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
+        audios=AudiosSerializer([obj for obj in Audios.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]],many=True)
         data[i]["Audios"]=audios.data
     return JsonResponse(data, status=201,safe=False)
 def yieldALL(request):
