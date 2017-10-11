@@ -8,7 +8,7 @@ The repository contains the codes for the server side of the ITS Project. The pr
 
 The server side needs some dependencies to build the project. It is recommended to use _virtualenv_ to install the dependencies. The installation guide is works for Ubuntu 16.04 at the time of writing.
 
-First, clone this repository, with link provided [here](https://github.com/vaishnavm217/itsprojectserver.git). Then follow one of the following methods:
+First, clone this repository, with link provided [here](https://github.com/vaishnavm217/itsprojectserver.git). It is assumed that the project user has installed all the required GIS modules using the [Ubuntu PPA](https://launchpad.net/~ubuntugis/+archive/ubuntu/ppa). Then, follow one of the following methods:
 
 1. Installing dependencies using _Virtualenv_ (recommended)
 
