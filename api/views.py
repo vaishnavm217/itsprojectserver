@@ -148,33 +148,33 @@ def snippet_list8(request):
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
 def Housew(request,dat_id):
-    data = {}
-    house = Houses.objects.filter(HID=dat_id)
-    house = HousesSerializer(house,many=True)
-    data["Houses"]=house.data
-    members = MembersSerializer(Members.objects.filter(HID=dat_id),many=True)
-    data["Members"]=members.data
-    photos = PhotosSerializer(Photos.objects.filter(HID=dat_id),many=True)
-    data["Photos"]=photos.data
-    videos = VideosSerializer(Photos.objects.filter(HID=dat_id),many=True)
-    data["Videos"]=videos.data
-    audios = AudiosSerializer(Photos.objects.filter(HID=dat_id),many=True)
-    data["Audios"]=audios.data
-    wells = WellsSerializer(Wells.objects.filter(HID=dat_id),many=True)
-    temp = wells.data
-    for i in range(len(temp)):
-        k = temp[i]["WID"]
-        ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
-        temp[i]["Yields"] = ser.data
-    data["Wells"] = temp
-    temp = FarmsSerializer(Farms.objects.filter(HID=dat_id),many=True)
-    temp = temp.data
-    for i in range(len(temp)):
-        k = temp[i]["FID"]
-        ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
-        temp[i]["Crops"] = ser.data
-    data["Farms"] = temp
-    return JsonResponse(data, status=201,safe=False)
+    # data = {}
+    # house = Houses.objects.filter(HID=dat_id)
+    # house = HousesSerializer(house,many=True)
+    # data["Houses"]=house.data
+    # members = MembersSerializer(Members.objects.filter(HID=dat_id),many=True)
+    # data["Members"]=members.data
+    # photos = PhotosSerializer(Photos.objects.filter(HID=dat_id),many=True)
+    # data["Photos"]=photos.data
+    # videos = VideosSerializer(Photos.objects.filter(HID=dat_id),many=True)
+    # data["Videos"]=videos.data
+    # audios = AudiosSerializer(Photos.objects.filter(HID=dat_id),many=True)
+    # data["Audios"]=audios.data
+    # wells = WellsSerializer(Wells.objects.filter(HID=dat_id),many=True)
+    # temp = wells.data
+    # for i in range(len(temp)):
+    #     k = temp[i]["WID"]
+    #     ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
+    #     temp[i]["Yields"] = ser.data
+    # data["Wells"] = temp
+    # temp = FarmsSerializer(Farms.objects.filter(HID=dat_id),many=True)
+    # temp = temp.data
+    # for i in range(len(temp)):
+    #     k = temp[i]["FID"]
+    #     ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
+    #     temp[i]["Crops"] = ser.data
+    # data["Farms"] = temp
+    return JsonResponse({}, status=201,safe=False)
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
 def HouseALL(request):
@@ -188,26 +188,38 @@ def HouseALL(request):
         data[i]["Houses"]=home.data
         members=MembersSerializer(Members.objects.filter(HID=temp[i]["HID"]),many=True)
         data[i]["Members"]=members.data
-        photos=PhotosSerializer(Photos.objects.filter(HID=temp[i]["HID"]),many=True)
-        data[i]["Photos"]=photos.data
-        videos=VideosSerializer(Videos.objects.filter(HID=temp[i]["HID"]),many=True)
-        data[i]["Videos"]=videos.data
-        audios=AudiosSerializer(Audios.objects.filter(HID=temp[i]["HID"]),many=True)
-        data[i]["Audios"]=audios.data
-        wells = WellsSerializer(Wells.objects.filter(FID=temp[i]["HID"]),many=True)
-        temp2 = wells.data
-        for j in range(len(temp2)):
-            k = temp2[j]["WID"]
-            ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
-            temp2[j]["Yields"] = ser.data
-        data[i]["Wells"] = temp2
         farms = FarmsSerializer(Farms.objects.filter(HID=temp[i]["HID"]),many=True)
         temp2 = farms.data
         for j in range(len(temp2)):
             k = temp2[j]["FID"]
             ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
+            pho = PhotosSerializer(Photos.objects.filter(Type="FID",ID=k),many=True)
+            vid = VideosSerializer(Videos.objects.filter(Type="FID",ID=k),many=True)
+            aud = AudiosSerializer(Audios.objects.filter(Type="FID",ID=k),many=True)
             temp2[j]["Crops"] = ser.data
+            temp2[j]["Photos"] = pho.data
+            temp2[j]["Audios"] = aud.data
+            temp2[j]["Videos"] = vid.data
         data[i]["Farms"] = temp2
+        wells = WellsSerializer(Wells.objects.all()),many=True)
+        temp3 = wells.data
+        for j in range(len(temp2)):
+            k = temp3[j]["WID"]
+            ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
+            pho = PhotosSerializer(Photos.objects.filter(Type="WID",ID=k),many=True)
+            vid = VideosSerializer(Videos.objects.filter(Type="WID",ID=k),many=True)
+            aud = AudiosSerializer(Audios.objects.filter(Type="WID",ID=k),many=True)
+            temp3[j]["Yields"] = ser.data
+            temp3[j]["Photos"] = pho.data
+            temp3[j]["Audios"] = aud.data
+            temp3[j]["Videos"] = vid.data
+        data[i]["Wells"] = temp3
+        photos1=PhotosSerializer(Photos.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
+        data[i]["Photos"]=photos.data
+        videos=VideosSerializer(Videos.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
+        data[i]["Videos"]=videos.data
+        audios=AudiosSerializer(Audios.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
+        data[i]["Audios"]=audios.data
     return JsonResponse(data, status=201,safe=False)
 def yieldALL(request):
     data=Yields.objects.all()
