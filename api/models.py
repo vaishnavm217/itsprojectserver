@@ -3,6 +3,7 @@ from django.contrib.gis.geos import Point
 import datetime
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from django.utils.safestring import mark_safe
 import os
 def validate_video_extension(value):
     ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
