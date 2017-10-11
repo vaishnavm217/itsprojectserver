@@ -214,7 +214,7 @@ def HouseALL(request):
             temp2[j]["Videos"] = vid.data
             temp2[j]["Wells"] = temp5
         data[i]["Farms"] = temp2
-        photos1=PhotosSerializer([obj for obj in Photos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]],many=True)
+        photos=PhotosSerializer([obj for obj in Photos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]],many=True)
         data[i]["Photos"]=photos.data
         videos=VideosSerializer([obj for obj in Videos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]],many=True)
         data[i]["Videos"]=videos.data
