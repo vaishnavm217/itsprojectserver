@@ -3,7 +3,17 @@ from django.contrib.gis.geos import Point
 import datetime
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-
+import os
+def validate_video_extension(value):
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.avi', '.mov', '.flv', '.mpeg', '.mp4', '.wmv', '.mkv','.gif']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError(u'Unsupported file extension.')
+def validate_audio_extension(value):
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.wav', '.mp3', '.aac', '.wma', '.flac']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError(u'Unsupported file extension.')
 
 class Houses(models.Model):
     HID=models.AutoField(primary_key=True)
@@ -99,7 +109,7 @@ class Videos(models.Model):
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
     VID=models.AutoField(primary_key=True)
-    file=models.FileField(upload_to = 'uploaded_video/')
+    vfile=models.FileField(upload_to = 'uploaded_video/',validators=[validate_video_extension])
     def __str__(self):
         return "%s : %s" % (self.HID,self.VID)
     @property
@@ -118,7 +128,7 @@ class Audios(models.Model):
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True)
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True)
     AID=models.AutoField(primary_key=True)
-    file=models.FileField(upload_to = 'uploaded_audio/')
+    afile=models.FileField(upload_to = 'uploaded_audio/',validators=[validate_audio_extension])
     def __str__(self):
         return "%s : %s" % (self.HID,self.AID)
     @property
