@@ -179,11 +179,11 @@ def Housew(request,dat_id):
         temp2[j]["Videos"] = vid.data
         temp2[j]["Wells"] = temp5
     data["Farms"] = temp2
-    photos=PhotosSerializer(Photos.objects.filter(Type="HID",HID__in=[obj.HID for obj in Photos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
+    photos=PhotosSerializer(Photos.objects.filter(Type="HID",HID__in=[obj.HID for obj in Photos.objects.filter(Type="HID") if obj.ID==dat_id]),many=True)
     data["Photos"]=photos.data
-    videos=VideosSerializer(Videos.objects.filter(Type="HID",HID__in=[obj.HID for obj in Videos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
+    videos=VideosSerializer(Videos.objects.filter(Type="HID",HID__in=[obj.HID for obj in Videos.objects.filter(Type="HID") if obj.ID==dat_id]),many=True)
     data["Videos"]=videos.data
-    audios=AudiosSerializer(Audios.objects.filter(Type="HID",HID__in=[obj.HID for obj in Audios.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
+    audios=AudiosSerializer(Audios.objects.filter(Type="HID",HID__in=[obj.HID for obj in Audios.objects.filter(Type="HID") if obj.ID==dat_id]),many=True)
     data["Audios"]=audios.data
     return JsonResponse({}, status=201,safe=False)
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
