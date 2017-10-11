@@ -193,6 +193,18 @@ def HouseALL(request):
         for j in range(len(temp2)):
             k = temp2[j]["FID"]
             ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
+            wells = WellsSerializer(Wells.objects.filter(FID=k),many=True)
+            temp5 = wells.data
+            for j1 in range(len(temp5)):
+                k = temp5[j1]["WID"]
+                ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
+                pho = PhotosSerializer(Photos.objects.filter(Type="WID",ID=k),many=True)
+                vid = VideosSerializer(Videos.objects.filter(Type="WID",ID=k),many=True)
+                aud = AudiosSerializer(Audios.objects.filter(Type="WID",ID=k),many=True)
+                temp5[j1]["Yields"] = ser.data
+                temp5[j1]["Photos"] = pho.data
+                temp5[j1]["Audios"] = aud.data
+                temp5[j1]["Videos"] = vid.data
             pho = PhotosSerializer(Photos.objects.filter(Type="FID",ID=k),many=True)
             vid = VideosSerializer(Videos.objects.filter(Type="FID",ID=k),many=True)
             aud = AudiosSerializer(Audios.objects.filter(Type="FID",ID=k),many=True)
@@ -200,20 +212,8 @@ def HouseALL(request):
             temp2[j]["Photos"] = pho.data
             temp2[j]["Audios"] = aud.data
             temp2[j]["Videos"] = vid.data
+            temp2[j]["Wells"] = temp5
         data[i]["Farms"] = temp2
-        wells = WellsSerializer(Wells.objects.all()),many=True)
-        temp3 = wells.data
-        for j in range(len(temp2)):
-            k = temp3[j]["WID"]
-            ser = YieldsSerializer(Yields.objects.filter(WID=k),many=True)
-            pho = PhotosSerializer(Photos.objects.filter(Type="WID",ID=k),many=True)
-            vid = VideosSerializer(Videos.objects.filter(Type="WID",ID=k),many=True)
-            aud = AudiosSerializer(Audios.objects.filter(Type="WID",ID=k),many=True)
-            temp3[j]["Yields"] = ser.data
-            temp3[j]["Photos"] = pho.data
-            temp3[j]["Audios"] = aud.data
-            temp3[j]["Videos"] = vid.data
-        data[i]["Wells"] = temp3
         photos1=PhotosSerializer(Photos.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
         data[i]["Photos"]=photos.data
         videos=VideosSerializer(Videos.objects.filter(Type="HID",ID=temp[i]["HID"]),many=True)
