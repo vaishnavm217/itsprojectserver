@@ -204,6 +204,7 @@ def HouseALL(request):
         for j in range(len(temp2)):
             k = temp2[j]["FID"]
             ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
+            temp2[j]["Crops"] = ser.data
             wells = WellsSerializer(Wells.objects.filter(FID=k),many=True)
             temp5 = wells.data
             for j1 in range(len(temp5)):
@@ -219,7 +220,6 @@ def HouseALL(request):
             pho = PhotosSerializer(Photos.objects.filter(Type="FID",FID__in=[obj.FID for obj in Photos.objects.filter(Type="FID") if obj.ID==k]),many=True)
             vid = VideosSerializer(Videos.objects.filter(Type="FID",FID__in=[obj.FID for obj in Videos.objects.filter(Type="FID") if obj.ID==k]),many=True)
             aud = AudiosSerializer(Audios.objects.filter(Type="FID",FID__in=[obj.FID for obj in Audios.objects.filter(Type="FID") if obj.ID==k]),many=True)
-            temp2[j]["Crops"] = ser.data
             temp2[j]["Photos"] = pho.data
             temp2[j]["Audios"] = aud.data
             temp2[j]["Videos"] = vid.data
