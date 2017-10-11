@@ -1,1 +1,4 @@
 *.pyc
+api/migrations/*
+.DS_Store
+server/media/*

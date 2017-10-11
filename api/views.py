@@ -183,7 +183,7 @@ def HouseALL(request):
     house=HousesSerializer(house,many=True)
     temp=house.data
     for i in range(len(temp)):
-        data[i]={}
+        data[i]={}  
         home=HousesSerializer(Houses.objects.filter(HID=temp[i]["HID"]),many=True)
         data[i]["Houses"]=home.data
         members=MembersSerializer(Members.objects.filter(HID=temp[i]["HID"]),many=True)
@@ -194,7 +194,7 @@ def HouseALL(request):
         data[i]["Videos"]=videos.data
         audios=AudiosSerializer(Audios.objects.filter(HID=temp[i]["HID"]),many=True)
         data[i]["Audios"]=audios.data
-        wells = WellsSerializer(Wells.objects.filter(HID=temp[i]["HID"]),many=True)
+        wells = WellsSerializer(Wells.objects.filter(FID=temp[i]["HID"]),many=True)
         temp2 = wells.data
         for j in range(len(temp2)):
             k = temp2[j]["WID"]

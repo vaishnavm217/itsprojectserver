@@ -14,17 +14,17 @@ class MembersSerializer(serializers.ModelSerializer):
 class PhotosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photos
-        fields = ('HID','PHID','file')
+        fields = ('Type','ID','PHID','photo')
 
 class VideosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Videos
-        fields = ('HID','VID','file')
+        fields = ('Type','ID','VID','video')
 
 class AudiosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audios
-        fields = ('HID','AID','file')
+        fields = ('Type','ID','AID','audio')
 
 class FarmsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,7 +39,7 @@ class CropsSerializer(serializers.ModelSerializer):
 class WellsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wells
-        fields = ('HID', 'WID','point', 'AvgYield' )
+        fields = ('FID', 'WID','point', 'Depth','AvgYield' )
 
 class YieldsSerializer(serializers.ModelSerializer):
     class Meta:
