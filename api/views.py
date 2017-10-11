@@ -185,7 +185,7 @@ def Housew(request,dat_id):
     data["Videos"]=videos.data
     audios=AudiosSerializer(Audios.objects.filter(Type="HID",HID__in=[obj.HID for obj in Audios.objects.filter(Type="HID") if obj.ID==dat_id]),many=True)
     data["Audios"]=audios.data
-    return JsonResponse({}, status=201,safe=False)
+    return JsonResponse(data, status=201,safe=False)
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
 def HouseALL(request):
