@@ -218,7 +218,7 @@ def HouseALL(request):
         data[i]["Photos"]=photos.data
         videos=VideosSerializer(Videos.objects.filter(Type="HID",HID=[obj.HID for obj in Videos.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
         data[i]["Videos"]=videos.data
-        audios=AudiosSerializer(Audios.objects.filter(Type="HID",HID=[obj.HID for obj in Audios.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]],many=True)
+        audios=AudiosSerializer(Audios.objects.filter(Type="HID",HID=[obj.HID for obj in Audios.objects.filter(Type="HID") if obj.ID==temp[i]["HID"]]),many=True)
         data[i]["Audios"]=audios.data
     return JsonResponse(data, status=201,safe=False)
 def yieldALL(request):
