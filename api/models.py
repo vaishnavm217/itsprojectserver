@@ -115,11 +115,7 @@ class Videos(models.Model):
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True,null=True)
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True,null=True)
     VID=models.AutoField(primary_key=True)
-<<<<<<< HEAD
     vfile=models.FileField(upload_to = 'uploaded_video/',validators=[validate_video_extension])
-=======
-    video=models.FileField(upload_to = 'uploaded_video/')
->>>>>>> 626866cd60c5c7c34aec286e2ed4baed4e017147
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.VID)
     def image_tag(self):
@@ -144,11 +140,7 @@ class Audios(models.Model):
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE,blank=True,null=True)
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE,blank=True,null=True)
     AID=models.AutoField(primary_key=True)
-<<<<<<< HEAD
     afile=models.FileField(upload_to = 'uploaded_audio/',validators=[validate_audio_extension])
-=======
-    audio=models.FileField(upload_to = 'uploaded_audio/')
->>>>>>> 626866cd60c5c7c34aec286e2ed4baed4e017147
     def __str__(self):
         return "%s-%s : %s" % (self.Type,self.ID,self.AID)
     def image_tag(self):
