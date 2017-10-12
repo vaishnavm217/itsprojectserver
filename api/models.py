@@ -18,19 +18,19 @@ def validate_audio_extension(value):
     valid_extensions = ['.wav', '.mp3', '.aac', '.wma', '.flac']
     if not ext.lower() in valid_extensions:
         raise ValidationError(u'Unsupported file extension.')
-	'''
-		Database(Refer EER diagram for further info)
-	Major tables:
-	1.Houses
-	2.Members
-	3.Farms
-	4.Crops
-	5.Wells
-	6.Yields
-	7.Photos
-	8.Videos
-	9.Audios
-	'''
+'''
+	Database(Refer EER diagram for further info)
+Major tables:
+1.Houses
+2.Members
+3.Farms
+4.Crops
+5.Wells
+6.Yields
+7.Photos
+8.Videos
+9.Audios
+'''
 class Houses(models.Model):
 	'''
 			Houses
