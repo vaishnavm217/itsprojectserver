@@ -1,10 +1,8 @@
 from api.models import *
 from rest_framework import serializers
-'''
-	Serializers
-Every model/tables has its own serializer.
-Serializer parses data in each table.
-'''
+# 	Serializers
+# Every model/tables has its own serializer.
+# Serializer parses data in each table.
 class HousesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Houses
