@@ -5,6 +5,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 import os
+'''
+	Validation functions
+'''
 def validate_video_extension(value):
     ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
     valid_extensions = ['.avi', '.mov', '.flv', '.mpeg', '.mp4', '.wmv', '.mkv','.gif']
@@ -15,8 +18,26 @@ def validate_audio_extension(value):
     valid_extensions = ['.wav', '.mp3', '.aac', '.wma', '.flac']
     if not ext.lower() in valid_extensions:
         raise ValidationError(u'Unsupported file extension.')
-
+'''
+	Database(Refer EER diagram for further info)
+Major tables:
+	1.Houses
+	2.Members
+	3.Farms
+	4.Crops
+	5.Wells
+	6.Yields
+	7.Photos
+	8.Videos
+	9.Audios
+'''
 class Houses(models.Model):
+	'''
+			Houses
+	HID-(House ID)Primary key
+	income-income of each house
+	point-GIS coordinates of each house
+	'''
     HID=models.AutoField(primary_key=True)
     income=models.FloatField(default=0.0)
     point=models.PointField(default=Point(1,1),null=True)
@@ -24,6 +45,14 @@ class Houses(models.Model):
         return "%s" %(self.HID)
 
 class Members(models.Model):
+	'''
+			Members
+	HID-Foreign key ref to Houses
+	PID-Person ID primary key
+	Age-Age of the members
+	Gender-Gender of person
+	Name-Person name
+	'''
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     PID=models.AutoField(primary_key=True)
     Age=models.IntegerField(default=0)
@@ -34,6 +63,13 @@ class Members(models.Model):
         return "%s : %s" %(self.PID,self.Name)
 
 class Farms(models.Model):
+	'''
+			Farms
+	HID-Foreign key ref to Houses
+	FID-Farm ID Primary key
+	plot-GIS polygon of farm
+	area-Area of farm
+	'''
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
     FID=models.AutoField(primary_key=True)
     plot=models.PolygonField(srid=4326,geography=True)
@@ -45,6 +81,14 @@ class Farms(models.Model):
         self.area=temp.area
         super().save(self)
 class Crops(models.Model):
+	'''
+			Crops
+	Name-Crop name
+	FID-Foreign key ref to Farms
+	Year-Year in which the crop was grown
+	Seasons-Season of cultivation
+	Area-Area of farm in which the crop was grown
+	'''
     Name=models.CharField(max_length=50,default="Rice")
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
     Year=models.IntegerField()
@@ -55,6 +99,14 @@ class Crops(models.Model):
         return "%s : %s" %(self.FID,self.Year)
 
 class Wells(models.Model):
+	'''
+			Wells
+	FID-Foreign key ref to Farms
+	WID-Well ID Primary key
+	point-GIS coordinates of well
+	AvgYield-Average of all yields(m)
+	Depth-Depth of well(m)
+	'''
     FID=models.ForeignKey(Farms,to_field='FID',on_delete=models.CASCADE)
     WID=models.AutoField(primary_key=True)
     point=models.PointField(default=Point(1,1))
@@ -64,6 +116,12 @@ class Wells(models.Model):
         return "%s" %(self.WID)
 
 class Yields(models.Model):
+	'''
+			Yields
+	WID-Foreign key ref to wells
+	Yield-Yield measured on that date(m)
+	measured_date-Date on which yield was measured
+	'''
     WID=models.ForeignKey(Wells,to_field='WID',on_delete=models.CASCADE)
     Yield=models.FloatField(default=0.0)
     measured_date=models.DateTimeField(default=datetime.datetime.now())
@@ -85,6 +143,13 @@ class Yields(models.Model):
             i.save()
 
 class Photos(models.Model):
+	'''
+			Photos
+	Type-Specifiying type of ID
+	ID-Foreign key to specify type
+	PHID-Photo ID
+	photo-the image
+	'''
     types=(('WID','Well'),('FID','Farm',),('HID','House'))
     Type=models.CharField(max_length=3,choices=types)
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True,null=True)
@@ -111,6 +176,13 @@ class Photos(models.Model):
     
 
 class Videos(models.Model):
+	'''
+			Videos
+	Type-Specifiying type of ID
+	ID-Foreign key to specify type
+	VID-Video ID
+	video-the video
+	'''
     types=(('WID','Well'),('FID','Farm',),('HID','House'))
     Type=models.CharField(max_length=3,choices=types)
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True,null=True)
@@ -136,6 +208,13 @@ class Videos(models.Model):
             return self.FID.FID
 
 class Audios(models.Model):
+	'''
+			Audios
+	Type-Specifiying type of ID
+	ID-Foreign key to specify type
+	AID-Audio ID
+	audio-the sound file
+	'''
     types=(('WID','Well'),('FID','Farm',),('HID','House'))
     Type=models.CharField(max_length=3,choices=types)
     HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE,blank=True,null=True)

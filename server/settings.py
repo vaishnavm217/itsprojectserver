@@ -32,7 +32,15 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+'''
+	Extra applications to be added are
+	1.django.contrib.gis
+	2.rest_framework
+	3.rest_framework_gis
+	4.api.apps.config
+	1,2,3-enabling GIS and server side scripts related to GIS
+	4-App config
+'''
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'django.contrib.admin',
@@ -87,7 +95,9 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
+'''
+	Database requires POSTGIS installation
+'''
 DATABASES = {
    'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -142,6 +152,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+'''
+	Media directory to store and retrieve media files
+'''
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

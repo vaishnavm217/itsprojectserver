@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from api import views
-
+'''
+	Links to the REST server to get the data in tables in JSON format.
+'''
 urlpatterns = [
     url(r'^households/',views.snippet_list1),
 	url(r'^members/',views.snippet_list2),

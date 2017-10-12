@@ -17,6 +17,9 @@ from django.conf.urls import url,include
 from django.contrib.gis import admin
 from django.conf.urls.static import static
 from django.conf import settings
+'''
+	URL Patterns to app for retrieving data. 
+'''
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',include('api.urls')),

@@ -10,7 +10,14 @@ from rest_framework.parsers import JSONParser
 from api.models import Houses, Members, Photos, Videos, Farms, Crops, Wells, Yields, Audios
 from .serializers import HousesSerializer, MembersSerializer, PhotosSerializer, VideosSerializer, FarmsSerializer, CropsSerializer, WellsSerializer, YieldsSerializer,AudiosSerializer
 
-
+'''
+			Views
+	Parses the data from serializers and hosts it in JSON format.
+	Functions:
+	Snippet_list1 to Snippet_list8,yieldALL-Testing functions
+	Housew-Returns the JSON data specific to a particular house differentiated by HID
+	HouseALL-Return the JSON data of all houses and related data.
+'''
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
 def snippet_list1(request):
@@ -148,6 +155,13 @@ def snippet_list8(request):
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
 def Housew(request,dat_id):
+	'''
+	Parameters:
+		request-request from client
+		dat_id-Required HID
+	Returns:
+		JSON Response containing the required data
+	'''
     data={}  
     home=HousesSerializer(Houses.objects.filter(HID=dat_id),many=True)
     data["Houses"]=home.data
@@ -189,6 +203,12 @@ def Housew(request,dat_id):
 @detail_route(renderer_classes=(renderers.StaticHTMLRenderer,))
 @csrf_exempt
 def HouseALL(request):
+	'''
+	Parameters:
+		request-request from client
+	Returns:
+		JSON Response containing the required data
+	'''
     data={}
     house=Houses.objects.all()
     house=HousesSerializer(house,many=True)

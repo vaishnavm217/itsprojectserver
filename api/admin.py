@@ -1,19 +1,41 @@
 from django.contrib.gis import admin
 from .models import *
-
-# Register your models here.
 class ImageAdmin(admin.OSMGeoAdmin):
-    # explicitly reference fields to be shown, note image_tag is read-only
+	"""
+	ImageAdmin:
+	Custom admin interface for viewing and validation of images.
+	Parameter Displayed:
+		Type, HID, FID, WID, image_tag, photo
+	Read Only Parameters:
+		image_tag
+	"""
     fields = ( 'Type','HID','FID','WID','image_tag','photo' )
-    readonly_fields = ('image_tag',)
+	readonly_fields = ('image_tag',)
+
 class VideoAdmin(admin.OSMGeoAdmin):
-    # explicitly reference fields to be shown, note image_tag is read-only
+    """
+	VideoAdmin:
+	Custom admin interface for viewing and validation of Videos.
+	Parameter Displayed:
+		Type, HID, FID, WID, image_tag, photo
+	Read Only Parameters:
+		image_tag
+	"""
     fields = ( 'Type','HID','FID','WID','image_tag','video' )
     readonly_fields = ('image_tag',)
+
 class AudioAdmin(admin.OSMGeoAdmin):
-    # explicitly reference fields to be shown, note image_tag is read-only
+	"""   
+	ImageAdmin:
+	Custom admin interface for viewing and validation of Audio.
+	Parameter Displayed:
+		Type, HID, FID, WID, image_tag, photo
+	Read Only Parameters:
+		image_tag
+	"""
     fields = ( 'Type','HID','FID','WID','image_tag','audio' )
     readonly_fields = ('image_tag',)
+
 admin.site.register(Houses,admin.OSMGeoAdmin)
 admin.site.register(Members,admin.OSMGeoAdmin)
 admin.site.register(Farms,admin.OSMGeoAdmin)
