@@ -19,7 +19,7 @@ def validate_audio_extension(value):
 	if not ext.lower() in valid_extensions:
 		raise ValidationError(u'Unsupported file extension.')
 '''
-	Database(Refer EER diagram for further info)
+	Database
 Major tables:
 1.Houses
 2.Members
