@@ -29,9 +29,14 @@ First, clone this repository, with link provided [here](https://github.com/vaish
     
     - Go to the downloaded repository _itsprojectserver_ and run the following command: <br>
         ```pip3 install -r requirements.txt```. <br><br> It will install all the required dependencies in [requirements.txt](https://github.com/vaishnavm217/itsprojectserver/blob/master/requirements.txt).
+ 
+Run the following command or add this to your .profile file.<br>
+    ```export LIBRARY_PATH_ITS="/path/to/lib"```
         
 ## Usage
 
+To run the server side of the project, just issue the following command in the _itsprojectserver_ repository:<br>
+```python3 manage.py runserver```.
 
     
     
