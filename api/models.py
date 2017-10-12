@@ -9,15 +9,15 @@ import os
 	Validation functions
 '''
 def validate_video_extension(value):
-    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
-    valid_extensions = ['.avi', '.mov', '.flv', '.mpeg', '.mp4', '.wmv', '.mkv','.gif']
-    if not ext.lower() in valid_extensions:
-        raise ValidationError(u'Unsupported file extension.')
+	ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+	valid_extensions = ['.avi', '.mov', '.flv', '.mpeg', '.mp4', '.wmv', '.mkv','.gif']
+	if not ext.lower() in valid_extensions:
+		raise ValidationError(u'Unsupported file extension.')
 def validate_audio_extension(value):
-    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
-    valid_extensions = ['.wav', '.mp3', '.aac', '.wma', '.flac']
-    if not ext.lower() in valid_extensions:
-        raise ValidationError(u'Unsupported file extension.')
+	ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+	valid_extensions = ['.wav', '.mp3', '.aac', '.wma', '.flac']
+	if not ext.lower() in valid_extensions:
+		raise ValidationError(u'Unsupported file extension.')
 '''
 	Database(Refer EER diagram for further info)
 Major tables:
