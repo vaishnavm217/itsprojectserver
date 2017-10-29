@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The repository contains the codes for the server side of the ITS Project. The project has been made using **Django Framework**. It consists of the models, serializers, views and settings of the project. 
+The repository contains the codes for the server side of the ITS Project. The Project has been made using **Django Framework**. It consists of the models, serializers, views and settings of the project. 
 
 ## Installation
 
