@@ -18,6 +18,9 @@ from os import environ
 GDAL_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgdal.so"#.format(environ.get('LD_LIBRARY_PATH'))
 GEOS_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgeos_c.so"#.format(environ.get('LD_LIBRARY_PATH'))
 PROJ4_LIBRARY_PATH = "/app/.heroku/vendor/lib/libproj.so"#.format(environ.get('LIBRARY_PATH'))
+environ["GDAL_LIBRARY_PATH"] = GDAL_LIBRARY_PATH
+environ["GEOS_LIBRARY_PATH"] = GEOS_LIBRARY_PATH
+environ["PROJ4_LIBRARY_PATH"] = PROJ4_LIBRARY_PATH
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
