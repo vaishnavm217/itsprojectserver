@@ -26,10 +26,7 @@ SECRET_KEY = '7op^nso$m4jrh99dqy$$8s$5ucl_jem1a=64$!u8gl!22%-z-e'
 
 # SECURITY WARNING: don't run with debug turned on in production!EEEEEEEEEEEE
 DEBUG = True
-ALLOWED_HOSTS = ['*']  
-
-
-
+ALLOWED_HOSTS = ['*']
 # Application definition
 '''
 	Extra applications to be added are
@@ -100,7 +97,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'group1',
+        'NAME': '',
         'USER': 'group1',
         'PASSWORD': '1',
         'HOST': 'localhost',
