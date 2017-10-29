@@ -16,8 +16,8 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from os import environ
 GDAL_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgdal.so"#.format(environ.get('LD_LIBRARY_PATH'))
-GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('LD_LIBRARY_PATH'))
-#PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('LIBRARY_PATH'))
+GEOS_LIBRARY_PATH = "/app/.heroku/vendor/lib/libgeos_c.so"#.format(environ.get('LD_LIBRARY_PATH'))
+PROJ4_LIBRARY_PATH = "/app/.heroku/vendor/lib/libproj.so"#.format(environ.get('LIBRARY_PATH'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
