@@ -11,13 +11,13 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-#import dj_database_url
+import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 from os import environ
-GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('LIBRARY_PATH_ITS'))
-GDAL_LIBRARY_PATH = "{}/libgdal.so".format(environ.get('LIBRARY_PATH_ITS'))
-PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('LIBRARY_PATH_ITS'))
+GEOS_LIBRARY_PATH = "/app/.geodjango/geos/lib/libgeos_c.so"
+GDAL_LIBRARY_PATH = "/app/.geodjango/geos/lib/libgeos_c.so"
+#PROJ4_LIBRARY_PATH = "{}/libproj.so".format(environ.get('LIBRARY_PATH'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -26,7 +26,6 @@ SECRET_KEY = '7op^nso$m4jrh99dqy$$8s$5ucl_jem1a=64$!u8gl!22%-z-e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#db_from_env = dj_database_url.config(conn_max_age=500)
 ALLOWED_HOSTS = ['*']  
 
 
@@ -157,6 +156,7 @@ USE_TZ = True
 '''
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
