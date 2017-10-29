@@ -24,7 +24,7 @@ GEOS_LIBRARY_PATH = "{}/libgeos_c.so".format(environ.get('LD_LIBRARY_PATH'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '7op^nso$m4jrh99dqy$$8s$5ucl_jem1a=64$!u8gl!22%-z-e'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in production!EEEEEEEEEEEE
 DEBUG = True
 ALLOWED_HOSTS = ['*']  
 
