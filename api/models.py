@@ -4,6 +4,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
 import os
 '''
 Validation functions
@@ -37,7 +38,7 @@ class UserProfile(models.Model):
    Phone = models.CharField(max_length=256, blank=True, null=True)
    HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
    PID=models.ForeignKey(Members,to_field='PID',on_delete=models.CASCADE)
-   
+
 class Houses(models.Model):
 	'''
 			Houses
