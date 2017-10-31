@@ -3,7 +3,7 @@ services:
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ppa -y
   - sudo apt-get update -q
-  - sudo apt-get install gdal* -y
+  - sudo apt-get install gdal-bin -y
   - psql -c "CREATE USER group1 WITH PASSWORD '1';" -U postgres
   - psql -c "CREATE DATABASE group1;" -U postgres
   - psql -c "GRANT permissions ON DATABASE group1 TO group1;" -U postgres
