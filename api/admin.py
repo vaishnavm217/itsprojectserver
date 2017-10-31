@@ -47,6 +47,7 @@ class AudioAdmin(admin.GeoModelAdmin):
 	fields = ( 'Type','HID','FID','WID','image_tag','audio' )
 	readonly_fields = ('image_tag',)
 
+admin.site.register(UserProfile)
 admin.site.register(Houses,admin.GeoModelAdmin)
 admin.site.register(Members,admin.GeoModelAdmin)
 admin.site.register(Farms,admin.GeoModelAdmin)
