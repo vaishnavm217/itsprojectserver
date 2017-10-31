@@ -167,6 +167,7 @@ def Housew(request,dat_id):
     for j in range(len(temp2)):
         k = temp2[j]["FID"]
         ser = CropsSerializer(Crops.objects.filter(FID=k),many=True)
+        temp2[j]["Crops"] = ser.data
         wells = WellsSerializer(Wells.objects.filter(FID=k),many=True)
         temp5 = wells.data
         for j1 in range(len(temp5)):
