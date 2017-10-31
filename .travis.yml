@@ -7,7 +7,9 @@ before_install:
   - sudo apt-get install postgresql-9.6-postgis-2.3 postgis -y -q
   - psql -c "CREATE USER group1 WITH PASSWORD '1';" -U postgres
   - psql -c "CREATE DATABASE group1;" -U postgres
+  - psql -c "CREATE DATABASE test_group1;" -U postgres
   - psql -c "GRANT ALL ON DATABASE group1 TO group1;" -U postgres
+  - psql -c "GRANT ALL ON DATABASE test_group1 TO group1;" -U postgres
   - psql -U postgres -c "CREATE EXTENSION postgis" -d group1
 language: python
 python:
