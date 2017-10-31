@@ -31,6 +31,13 @@ Major tables:
 8.Videos
 9.Audios
 '''
+
+class UserProfile(models.Model):
+   user = models.OneToOneField(User)
+   Phone = models.CharField(max_length=256, blank=True, null=True)
+   HID=models.ForeignKey(Houses,to_field='HID',on_delete=models.CASCADE)
+   PID=models.ForeignKey(Members,to_field='PID',on_delete=models.CASCADE)
+   
 class Houses(models.Model):
 	'''
 			Houses
