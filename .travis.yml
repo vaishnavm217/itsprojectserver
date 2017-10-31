@@ -22,5 +22,3 @@ script:
   - ./manage.py makemigrations
   - ./manage.py makemigrations api
   - ./manage.py migrate
-  - ./manage.py test # or py.test for Python versions 3.5 and below
-
