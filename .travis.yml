@@ -1,3 +1,7 @@
+before_install:
+  - sudo add-apt-repository ppa:ubuntugis/ppa
+  - sudo apt-get update
+  - sudo apt-get install gdal
 language: python
 python:
   - "3.5"
@@ -7,5 +11,5 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script:
-  - pytest # or py.test for Python versions 3.5 and below
+  - ./manage.py test # or py.test for Python versions 3.5 and below
 
