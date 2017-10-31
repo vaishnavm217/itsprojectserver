@@ -183,7 +183,7 @@ def Housew(request,dat_id):
         pho = PhotosSerializer(Photos.objects.filter(Type="FID",FID__in=[obj.FID for obj in Photos.objects.filter(Type="FID") if obj.ID==k]),many=True)
         vid = VideosSerializer(Videos.objects.filter(Type="FID",FID__in=[obj.FID for obj in Videos.objects.filter(Type="FID") if obj.ID==k]),many=True)
         aud = AudiosSerializer(Audios.objects.filter(Type="FID",FID__in=[obj.FID for obj in Audios.objects.filter(Type="FID") if obj.ID==k]),many=True)
-        temp2[j]["Crops"] = ser.data
+        temp2[j]["Yields"] = ser.data
         temp2[j]["Photos"] = pho.data
         temp2[j]["Audios"] = aud.data
         temp2[j]["Videos"] = vid.data
