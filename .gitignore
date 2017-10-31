@@ -2,3 +2,7 @@
 api/migrations/*
 .DS_Store
 server/media/*
+media/*
+*.mp3
+*.mp4
+
