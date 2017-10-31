@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 import os
+from smart_selects.db_fields import ChainedForeignKey
 '''
 Validation functions
 '''
@@ -37,8 +38,8 @@ class UserProfile(models.Model):
    user = models.OneToOneField(User)
    Phone = models.CharField(max_length=256, blank=True, null=True)
    HID=models.ForeignKey('Houses',to_field='HID',on_delete=models.CASCADE)
-   PID=models.ForeignKey('Members',to_field='PID',on_delete=models.CASCADE)
-
+   #PID=models.ForeignKey('Members',to_field='PID',on_delete=models.CASCADE)
+   PID= ChainedForeignKey('Members',chained_field="HID",chained_model_field="HID",show_all=False,auto_choose=True,sort=True)
 class Houses(models.Model):
 	'''
 			Houses

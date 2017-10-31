@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 	'django.contrib.gis',
 	'rest_framework',
     'rest_framework_gis',
+    'smart_selects',
 ]
 
 REST_FRAMEWORK = {
@@ -102,7 +103,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+SMART_SELECTS_JQUERY_URL = True
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 from .models import *
-from django.contrib.gis.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 class PInline(admin.StackedInline):
