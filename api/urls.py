@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^housedat/(?P<dat_id>[0-9]+)/',views.Housew),
     url(r'^houseall/',views.HouseALL),
     url(r'^yield/',views.yieldALL),
+    url(r'^news/',views.news,name="news"),
 ]
