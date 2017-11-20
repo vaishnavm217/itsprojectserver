@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/vaishnavm217/itsprojectserver.svg?branch=master)](https://travis-ci.org/vaishnavm217/itsprojectserver)
+[![Build Status](https://travis-ci.com/vaishnavm217/itsprojectserver.svg?token=z8Jvk5REJq1NbtWtHUty&branch=master)](https://travis-ci.com/vaishnavm217/itsprojectserver)
 # ITS Project Server - Group I
 
 ## Introduction
