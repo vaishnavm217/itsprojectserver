@@ -7,7 +7,7 @@ django-extensions==1.9.1
 django-filter==1.0.4
 django-rest==0.0.1
 django-smart-selects==1.5.2
-djangorestframework==3.6.4
+djangorestframework==3.11.2
 djangorestframework-gis==0.11.2
 gunicorn==19.7.1
 idna==2.6
